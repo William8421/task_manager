@@ -26,11 +26,11 @@ export const registerUser = async (req: Request, res: Response) => {
     // Check if username or email already exists
     const client = await pool.connect();
     const usernameQuery = await client.query(
-      "SELECT * FROM public.users WHERE username = $1",
+      "SELECT * FROM users WHERE username = $1",
       [username]
     );
     const emailQuery = await client.query(
-      "SELECT * FROM public.users WHERE email = $1",
+      "SELECT * FROM users WHERE email = $1",
       [email]
     );
 
@@ -44,7 +44,7 @@ export const registerUser = async (req: Request, res: Response) => {
 
     // Insert new user into database
     const insertQuery = `
-      INSERT INTO public.users (username, email, password, first_name, last_name, date_of_birth, profile_picture, phone_number)
+      INSERT INTO users (username, email, password, first_name, last_name, date_of_birth, profile_picture, phone_number)
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
       RETURNING *
     `;
@@ -82,7 +82,7 @@ export const signInUser = async (req: Request, res: Response) => {
   try {
     // Check if the user exists based on email
     const client = await pool.connect();
-    const query = "SELECT * FROM public.users WHERE email = $1";
+    const query = "SELECT * FROM users WHERE email = $1";
     const result = await client.query(query, [email]);
     const user = result.rows[0];
 
@@ -130,7 +130,7 @@ export const userProfile = async (req: Request, res: Response) => {
   try {
     const client = await pool.connect();
     const userQuery = await client.query(
-      "SELECT * FROM public.users WHERE user_id = $1",
+      "SELECT * FROM users WHERE user_id = $1",
       [user_id]
     );
     const user = userQuery.rows[0];
@@ -162,7 +162,7 @@ export const updateUser = async (req: Request, res: Response) => {
   try {
     const client = await pool.connect();
     const userQuery = await client.query(
-      "SELECT * FROM public.users WHERE user_id = $1",
+      "SELECT * FROM users WHERE user_id = $1",
       [user_id]
     );
     const user = userQuery.rows[0];
@@ -172,7 +172,7 @@ export const updateUser = async (req: Request, res: Response) => {
     }
 
     const usernameQuery = await client.query(
-      "SELECT * FROM public.users WHERE username = $1",
+      "SELECT * FROM users WHERE username = $1",
       [username]
     );
     const existedUsername = usernameQuery.rows[0];
@@ -187,7 +187,7 @@ export const updateUser = async (req: Request, res: Response) => {
 
     // Update user information
     const updateQuery = `
-      UPDATE public.users
+      UPDATE users
       SET username = COALESCE($2, username),
       first_name = COALESCE($3, first_name),
       last_name = COALESCE($4, last_name),
@@ -230,7 +230,7 @@ export const changePassword = async (req: Request, res: Response) => {
     // Retrieve the user's current password from the database
     const client = await pool.connect();
     const userQuery = await client.query(
-      "SELECT password FROM public.users WHERE user_id = $1",
+      "SELECT password FROM users WHERE user_id = $1",
       [user_id]
     );
     const user = userQuery.rows[0];
@@ -254,10 +254,10 @@ export const changePassword = async (req: Request, res: Response) => {
     const hashedNewPassword = await bcrypt.hash(newPassword, 10);
 
     // Update the user's password in the database
-    await pool.query(
-      "UPDATE public.users SET password = $1 WHERE user_id = $2",
-      [hashedNewPassword, user_id]
-    );
+    await pool.query("UPDATE users SET password = $1 WHERE user_id = $2", [
+      hashedNewPassword,
+      user_id,
+    ]);
 
     return sendSuccessResponse(res, 200, "Password changed successfully");
   } catch (err) {

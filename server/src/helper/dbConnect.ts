@@ -9,4 +9,15 @@ export const pool = new Pool({
   database: process.env.PG_DATABASE,
   password: process.env.PG_PASSWORD,
   port: parseInt(process.env.PG_PORT || "5432"), // Parse the port as integer
+  ssl: {
+    rejectUnauthorized: false, // This option is required if you're using self-signed certificates
+  },
+});
+
+pool.query("SELECT NOW()", (err, res) => {
+  if (err) {
+    console.error("Error executing query", err);
+  } else {
+    console.log("Query result", res.rows);
+  }
 });
