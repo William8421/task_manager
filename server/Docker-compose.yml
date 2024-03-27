@@ -10,7 +10,7 @@ services:
       - PORT=8000
       - PG_USER=${PG_USER}
       - PG_PASSWORD=${PG_PASSWORD}
-      - PG_HOST=host.docker.internal
+      - PG_HOST=${PG_HOST}
       - PG_PORT=5432
       - PG_DATABASE=${PG_DATABASE}
     depends_on:
