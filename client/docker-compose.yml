@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  angular:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    environment:
+      SERVER_URL: "http://35.156.80.110:8000"

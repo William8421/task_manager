@@ -1,0 +1,38 @@
+<div class="navbar-container" [class.scroll-background]="isScrolled">
+    <div class="navbar-backdrop" *ngIf="menu" (click)="toggleSwitcher()"></div>
+    <div class="bar-button-container">
+        <div class="burger-button-icon">
+            <div class='bar-button' (click)="toggleSwitcher()">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <div class="userIcon" *ngIf="isLoggedIn" (click)="redirectToProfile()">
+                <div *ngIf="userIcon; else emptyProfile">
+                    <img src="{{userIcon}}" alt="profile">
+                </div>
+                <ng-template #emptyProfile>
+                    <img src="../../../assets/empty-profile.png" alt="">
+                </ng-template>
+            </div>
+        </div>
+        <div class="app-name">
+            <h2>Task Manager</h2>
+        </div>
+    </div>
+    <div [class.menu-on]="menu" class='menu-off'>
+        <div class='routes-container'>
+            <button class="close-navbar" (click)="toggleSwitcher()">&times;</button>
+            <a routerLink=""><button (click)="toggleSwitcher()">Home</button></a>
+            <a routerLink="myprofile"><button (click)="toggleSwitcher()">My profile</button></a>
+            <a routerLink="tasks"><button (click)="toggleSwitcher()">My tasks</button></a>
+            <a routerLink="about"><button (click)="toggleSwitcher()">About</button></a>
+            <div *ngIf="!isLoggedIn" class='auth-container'>
+                <a routerLink="login"><button (click)="toggleSwitcher()">Login</button></a>
+                <a routerLink="signup"><button (click)="toggleSwitcher()">Sign up</button></a>
+            </div>
+            <div *ngIf="isLoggedIn" class='auth-container'><button (click)="logOut()">Logout</button>
+            </div>
+        </div>
+    </div>
+</div>

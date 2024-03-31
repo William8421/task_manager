@@ -1,0 +1,32 @@
+@import "../../../Variables";
+.login-container {
+  text-align: center;
+  font-size: 1.2rem;
+  padding-top: 5rem;
+  form {
+    @include COLUMN_ALIGN_CENTER;
+    gap: 2rem;
+    margin-top: 3rem;
+    .input-container {
+      @include COLUMN_ALIGN_CENTER;
+      position: relative;
+      gap: 0.5rem;
+      label {
+        span {
+          color: red;
+        }
+      }
+      input {
+        width: 90%;
+        border: none;
+        border-radius: 6px;
+        font-size: 1.2rem;
+      }
+      .eye-icon {
+        position: absolute;
+        top: 60%;
+        right: 5%;
+      }
+    }
+  }
+}

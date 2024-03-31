@@ -1,0 +1,19 @@
+<div class="modal">
+    <div class="modal-header">
+        <h2>Delete task</h2>
+    </div>
+    <div class="modal-content">
+        <div class="delete-body">
+            <p>Are you sure you want to delete
+                <br>
+                <span>{{ task?.title
+                    }}?</span> <br>This action cannot be
+                undone.
+            </p>
+            <div class="modal-footer" *ngIf="task">
+                <button class="main-button" (click)="deleteTask(task)">Delete</button>
+                <button class="cancel-button" (click)="closeDeleteModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

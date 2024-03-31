@@ -1,0 +1,79 @@
+@import "../../Variables.scss";
+.home-container {
+  min-height: 100vh;
+  padding-bottom: 3rem;
+  .home-background {
+    background: url(../../assets/home-background.jpg) right / cover no-repeat;
+    background-position: top;
+    min-height: 60vh;
+    width: 100%;
+    @include ROW_JUSTIFY_CENTER;
+    h2 {
+      width: 75%;
+      text-align: left;
+      line-height: 3rem;
+      text-decoration: underline;
+      color: $MAIN_COLOR;
+    }
+  }
+  .about-header {
+    height: 20vh;
+    @include ROW_JUSTIFY_CENTER;
+    h2 {
+      color: $MAIN_COLOR;
+      margin-bottom: 3rem;
+    }
+  }
+}
+.top-bottom-button-container {
+  text-align: center;
+  a {
+    position: relative;
+    .go-up,
+    .go-down {
+      font-size: 3rem;
+    }
+    .go-down {
+      padding-top: 1rem;
+    }
+    i::after {
+      content: "";
+      border-radius: 100%;
+      border: 3px solid $MAIN_COLOR;
+      position: absolute;
+      z-index: -1;
+      top: -15%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: ring 1.5s infinite;
+    }
+
+    @keyframes ring {
+      0% {
+        width: 30px;
+        height: 30px;
+        opacity: 0;
+      }
+
+      50% {
+        width: 35px;
+        height: 35px;
+        opacity: 1;
+      }
+
+      100% {
+        width: 70px;
+        height: 70px;
+        opacity: 0;
+      }
+    }
+  }
+}
+
+@media (min-width: 576px) {
+  .home-container {
+    .home-background {
+      height: 80vh;
+    }
+  }
+}

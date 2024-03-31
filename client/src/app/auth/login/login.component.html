@@ -1,0 +1,19 @@
+<div class="login-container">
+    <h1>Login</h1>
+    <form #loginForm="ngForm" (submit)="login(loginForm)">
+        <div class="input-container">
+            <label for="email">Email <span class="required-marker">*</span></label>
+            <input type="email" name="email" autocomplete="email" required ngModel>
+        </div>
+        <div class="input-container">
+            <label for="password">Password <span class="required-marker">*</span></label>
+            <input [type]="hide? 'text': 'password'" name="password" autocomplete="new-password" required ngModel>
+            <i class="eye-icon" (click)="hide = !hide" [class]="hide? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash' "></i>
+        </div>
+        <button class="main-button">Log in</button>
+        <div>
+            <div>No account yet? <span class="redirect" (click)=" RedirectRegister()">Register</span></div>
+        </div>
+    </form>
+    <div class="error-message">{{errorMessage}}</div>
+</div>

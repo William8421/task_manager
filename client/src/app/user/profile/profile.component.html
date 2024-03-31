@@ -1,0 +1,42 @@
+<div class="profile-container">
+    <div class="backdrop" *ngIf="showEditProfileModal || showChangePasswordModal" (click)="closeBackdrop()"></div>
+    <h1>My profile</h1>
+    <div class="response-message" *ngIf="profileResponse">
+        {{profileResponse}}</div>
+    <div class="user" *ngIf="user; else profileNotAvailable ">
+        <div class="profile-picture-container">
+            <div *ngIf="user.profile_picture; else emptyProfile">
+                <img src="{{user.profile_picture}}" alt="profile">
+            </div>
+            <ng-template #emptyProfile>
+                <img src="../../../assets/empty-profile.png" alt="">
+            </ng-template>
+
+        </div>
+        <div class="user-information">
+            <p><strong>Username: </strong> <span>{{ user.username }}</span></p>
+            <p><strong>First Name: </strong> <span>{{ user.first_name }}</span></p>
+            <p><strong>Last Name: </strong> <span>{{ user.last_name }}</span></p>
+            <p><strong>Email: </strong> <span>{{ user.email }}</span></p>
+            <p>
+                <strong>Password: </strong>
+                <span class="change-password-button" (click)="openChangePasswordModal(user)">Change Password</span>
+            </p>
+        </div>
+        <button class="main-button" (click)="openEditProfileModal(user)">Edit profile</button>
+    </div>
+    <ng-template #profileNotAvailable>
+        <p>Please <span class="redirect" (click)="redirectToLogin()">Login</span> to access
+            you profile </p>
+        <button class="main-button" (click)="openTempModal()">Edit profile</button>
+    </ng-template>
+
+    <app-edit-profile-modal *ngIf="showEditProfileModal" [user]="user"
+        (profileResponse)="handleProfileResponseChange($event)" (editCanceled)="closeEditProfileModal()"
+        (refreshUser)="getProfileInfo()"></app-edit-profile-modal>
+
+    <app-change-password-modal *ngIf="showChangePasswordModal" (profileResponse)="handleProfileResponseChange($event)"
+        (changePasswordCanceled)="closeChangePasswordModal()"
+        (refreshUser)="getProfileInfo()"></app-change-password-modal>
+
+</div>

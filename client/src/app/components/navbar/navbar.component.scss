@@ -1,0 +1,102 @@
+@import "../../../Variables";
+.navbar-container {
+  position: fixed;
+  top: 0%;
+  left: 0;
+  width: 100%;
+  height: 3rem;
+  z-index: 1;
+  transition: background-color 0.3s ease;
+  .bar-button-container {
+    @include ROW_JUSTIFY_BETWEEN;
+    align-items: center;
+    padding-top: 0.3rem;
+    .burger-button-icon {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      .bar-button {
+        width: 3rem;
+        height: 2.5rem;
+        @include COLUMN_ALIGN_CENTER;
+        justify-content: space-around;
+
+        .bar {
+          background-color: black;
+          height: 5px;
+          border-radius: 10px;
+          width: 80%;
+          @include ROW_JUSTIFY_CENTER;
+        }
+      }
+      .userIcon {
+        height: 2rem;
+        img {
+          width: 2rem;
+          height: 2rem;
+          border-radius: 50%;
+        }
+      }
+    }
+    .app-name {
+      width: 100%;
+      text-align: center;
+    }
+  }
+  .menu-off {
+    position: absolute;
+    left: -100%;
+    top: 0;
+    width: 80%;
+    height: 100vh;
+    transition: left 0.3s ease-in-out;
+    .routes-container {
+      background-color: $SECONDARY_COLOR;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 5rem 1rem;
+      position: relative;
+      .auth-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      .close-navbar {
+        position: absolute;
+        top: 0;
+        left: 5%;
+        font-size: 3rem;
+      }
+    }
+  }
+
+  .menu-on {
+    left: 0;
+  }
+  a,
+  div {
+    button {
+      background-color: transparent;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-size: 1.4rem;
+    }
+  }
+  .navbar-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+  }
+}
+
+.scroll-background {
+  background-color: $SECONDARY_COLOR;
+}

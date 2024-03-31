@@ -122,7 +122,7 @@ export const deleteTask = async (req: Request, res: Response) => {
     }
 
     await pool.query("DELETE FROM tasks WHERE task_id = $1", [task_id]);
-    sendSuccessResponse(res, 200, "Task deleted successfully");
+    sendSuccessResponse(res, 200, { message: "Task deleted successfully" });
   } catch (err) {
     console.error("Error deleting task:", err);
     sendErrorResponse(res, 500, "Internal Server Error");

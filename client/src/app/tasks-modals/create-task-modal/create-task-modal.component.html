@@ -1,0 +1,34 @@
+<div class="modal">
+    <div class="modal-header">
+        <h2>Create new Task</h2>
+    </div>
+    <div class="modal-content">
+        <form #newTaskForm="ngForm" (submit)="createTask(newTaskForm)">
+            <div class="input-container">
+                <label for="title">Title <span class="required-marker">*</span></label>
+                <input type="text" name="title" autocomplete="new-title" required ngModel>
+            </div>
+            <div class="input-container">
+                <label for="description">Description</label>
+                <textarea name="description" rows="5" ngModel></textarea>
+            </div>
+            <div class="input-container">
+                <label for="due_date">Due date <span class="required-marker">*</span></label>
+                <input type="date" name="due_date" autocomplete="new-date" required ngModel />
+            </div>
+            <div class="input-container">
+                <label for="status">Select status</label>
+                <select name="status" autocomplete="new-status" ngModel>
+                    <option value="pending">Pending</option>
+                    <option value="cancelled">Cancelled</option>
+                    <option value="completed">Completed</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button class="main-button" type="submit">Create</button>
+                <button class="cancel-button" type="button" (click)="closeCreateModal()">Cancel</button>
+            </div>
+        </form>
+        <p class="error-message" *ngIf="requiredError">{{requiredError}}</p>
+    </div>
+</div>

@@ -8,16 +8,8 @@ import { sendErrorResponse, sendSuccessResponse } from "../helper/response";
 // User registration
 export const registerUser = async (req: Request, res: Response) => {
   // Extract user data from request body
-  const {
-    username,
-    email,
-    password,
-    first_name,
-    last_name,
-    date_of_birth,
-    profile_picture,
-    phone_number,
-  } = req.body;
+  const { username, email, password, first_name, last_name, profile_picture } =
+    req.body;
 
   try {
     // Hash the password
@@ -44,8 +36,8 @@ export const registerUser = async (req: Request, res: Response) => {
 
     // Insert new user into database
     const insertQuery = `
-      INSERT INTO users (username, email, password, first_name, last_name, date_of_birth, profile_picture, phone_number)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+      INSERT INTO users (username, email, password, first_name, last_name, profile_picture)
+      VALUES ($1, $2, $3, $4, $5, $6)
       RETURNING *
     `;
     const newUser = await client.query(insertQuery, [
@@ -54,9 +46,7 @@ export const registerUser = async (req: Request, res: Response) => {
       hashedPassword,
       first_name,
       last_name,
-      date_of_birth || null,
       profile_picture || null,
-      phone_number || null,
     ]);
     const user = newUser.rows[0];
 
@@ -149,15 +139,8 @@ export const userProfile = async (req: Request, res: Response) => {
 
 // Update user information
 export const updateUser = async (req: Request, res: Response) => {
-  const {
-    user_id,
-    username,
-    first_name,
-    last_name,
-    date_of_birth,
-    profile_picture,
-    phone_number,
-  } = req.body;
+  const { user_id, username, first_name, last_name, profile_picture } =
+    req.body;
 
   try {
     const client = await pool.connect();
@@ -171,18 +154,21 @@ export const updateUser = async (req: Request, res: Response) => {
       return sendErrorResponse(res, 404, "User not found");
     }
 
-    const usernameQuery = await client.query(
-      "SELECT * FROM users WHERE username = $1",
-      [username]
-    );
-    const existedUsername = usernameQuery.rows[0];
-
-    if (existedUsername) {
-      return sendErrorResponse(
-        res,
-        401,
-        "Username already exists please try another username"
+    // Check if the username is being changed and if it exists for another user
+    if (username && username !== user.username) {
+      const usernameQuery = await client.query(
+        "SELECT * FROM users WHERE username = $1 AND user_id != $2",
+        [username, user_id]
       );
+      const existedUsername = usernameQuery.rows[0];
+
+      if (existedUsername) {
+        return sendErrorResponse(
+          res,
+          401,
+          "Username already exists. Please try another username."
+        );
+      }
     }
 
     // Update user information
@@ -191,9 +177,7 @@ export const updateUser = async (req: Request, res: Response) => {
       SET username = COALESCE($2, username),
       first_name = COALESCE($3, first_name),
       last_name = COALESCE($4, last_name),
-      date_of_birth = COALESCE($5, date_of_birth),
-      profile_picture = COALESCE($6, profile_picture),
-      phone_number = COALESCE($7, phone_number)
+      profile_picture = COALESCE($5, profile_picture)
     WHERE user_id = $1
     RETURNING *
     `;
@@ -203,9 +187,7 @@ export const updateUser = async (req: Request, res: Response) => {
       username || user.username,
       first_name || user.first_name,
       last_name || user.last_name,
-      date_of_birth || user.date_of_birth,
       profile_picture || user.profile_picture,
-      phone_number || user.phone_number,
     ]);
     const updatedUser = result.rows[0];
 

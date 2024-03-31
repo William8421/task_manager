@@ -1,0 +1,30 @@
+@import "../../../Variables";
+.profile-container {
+  padding-top: 5rem;
+  padding-bottom: 2rem;
+  @include COLUMN_ALIGN_CENTER;
+  gap: 3rem;
+  .user {
+    margin: 0 auto;
+    width: 80%;
+    @include COLUMN_ALIGN_CENTER;
+    gap: 1rem;
+    .profile-picture-container {
+      img {
+        display: block;
+        width: 200px;
+      }
+    }
+    .user-information {
+      p {
+        @include ROW_JUSTIFY_BETWEEN;
+        width: 100%;
+        margin: 1rem 0;
+      }
+      .change-password-button {
+        text-decoration: underline;
+        color: $MAIN_COLOR;
+      }
+    }
+  }
+}

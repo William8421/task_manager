@@ -1,0 +1,37 @@
+<div class="modal">
+    <div class="modal-header">
+        <h2>Edit profile</h2>
+    </div>
+    <div class="modal-content" *ngIf="user">
+        <form #editForm="ngForm" (submit)="editProfile(editForm)">
+            <div class="input-container">
+                <label for="username">New Username</label>
+                <input type="text" name="username" autocomplete="username" [(ngModel)]="user.username">
+            </div>
+            <div class="input-container">
+                <label for="first_name">New First Name</label>
+                <input type="text" name="first_name" autocomplete="first_name" [(ngModel)]="user.first_name">
+            </div>
+            <div class="input-container">
+                <label for="last_name">New Last Name</label>
+                <input type="text" name="last_name" autocomplete="last_name" [(ngModel)]="user.last_name">
+            </div>
+            <div class="input-container">
+                <label for="profile_picture">Edit profile picture</label>
+                <div class="picture-button-container">
+                    <input type="file" id="profile_picture" (change)="onFileSelected($event)" accept="image/*">
+                    <i class="fa-solid fa-cloud-arrow-up" type="button" (click)="selectFile()"></i>
+                    <span class="image-name" *ngIf="imageName"> {{imageName}} </span>
+                    <span *ngIf="selectedFile && selectedImage === '' ">
+                        <button class="main-button" type="button" (click)="uploadImage()">Upload</button>
+                    </span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="main-button" [disabled]="selectedFile && selectedImage === ''">Update</button>
+                <button class="cancel-button" type="button" (click)="closeEditModal()">Cancel</button>
+            </div>
+        </form>
+        <p class="error-message" *ngIf="errorMessage">{{errorMessage}}</p>
+    </div>
+</div>

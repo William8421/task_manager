@@ -1,0 +1,21 @@
+$MAIN_COLOR: #326480;
+$SECONDARY_COLOR: #3a97c1;
+$BG_COLOR: #cfcfd3;
+$MODAL_BG_COLOR: #cdcbbb;
+
+@mixin COLUMN_ALIGN_CENTER {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@mixin ROW_JUSTIFY_CENTER {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin ROW_JUSTIFY_BETWEEN {
+  display: flex;
+  justify-content: space-between;
+}

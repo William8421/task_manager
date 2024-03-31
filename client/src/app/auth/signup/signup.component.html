@@ -1,0 +1,59 @@
+<div class="signup-container">
+    <h1>Signup</h1>
+    <form #signupForm="ngForm" (submit)="register(signupForm)">
+        <!-- Username -->
+        <div class="input-container">
+            <label for="username">Username <span>*</span></label>
+            <input type="text" name="username" autocomplete="username" required ngModel>
+        </div>
+
+        <!-- First Name -->
+        <div class="input-container">
+            <label for="first_name">First Name <span>*</span></label>
+            <input type="text" name="first_name" autocomplete="first_name" required ngModel>
+        </div>
+
+        <!-- Last Name -->
+        <div class="input-container">
+            <label for="last_name">Last Name <span>*</span></label>
+            <input type="text" name="last_name" autocomplete="last_name" required ngModel>
+        </div>
+
+        <!-- Email -->
+        <div class="input-container">
+            <label for="email">Email <span>*</span></label>
+            <input type="email" name="email" autocomplete="email" required ngModel>
+        </div>
+
+        <!-- Password -->
+        <div class="input-container">
+            <label for="password">Password <span>*</span></label>
+            <input [type]="hide? 'text': 'password'" name="password" autocomplete="new-password" required ngModel>
+            <i class="eye-icon" (click)="hide = !hide" [class]="hide? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash' "></i>
+        </div>
+        <div class="input-container">
+            <label for="password">Confirm password <span>*</span></label>
+            <input [type]="hideConfirm? 'text': 'password'" name="confirmPassword" autocomplete="new-password" required
+                ngModel>
+            <i class="eye-icon" (click)="hideConfirm = !hideConfirm"
+                [class]="hideConfirm? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash' "></i>
+        </div>
+        <div class="input-container">
+            <label for="profile_picture">Profile picture</label>
+            <div class="picture-button-container">
+                <input type="file" id="profile_picture" (change)="onFileSelected($event)" accept="image/*">
+                <i class="fa-solid fa-cloud-arrow-up" type="button" (click)="selectFile()"></i>
+                <span class="image-name" *ngIf="imageName"> {{imageName}} </span>
+                <span *ngIf="selectedFile && selectedImage === '' ">
+                    <button class="main-button" type="button" (click)="uploadImage()">Upload</button>
+                </span>
+            </div>
+        </div>
+        <button class="main-button" [disabled]="selectedFile && selectedImage === ''">Register</button>
+        <div>
+            <div>Already have an account? <span class="redirect" (click)="RedirectLogin()">login</span></div>
+
+        </div>
+    </form>
+    <div class="error-message">{{errorMessage}}</div>
+</div>

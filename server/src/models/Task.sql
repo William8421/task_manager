@@ -6,6 +6,6 @@ CREATE TABLE tasks (
     status VARCHAR(20) DEFAULT 'pending',
     user_id UUID,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT NULL,
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
