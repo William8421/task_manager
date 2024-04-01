@@ -25,6 +25,7 @@ export class UserService {
   userIcon$: Observable<string | null> = this.profileIconSubject.asObservable();
 
   baseURL = 'http://35.156.80.110:8000';
+  // baseURL = 'http://localhost:8000';
 
   constructor(private http: HttpClient) {
     this.checkLoggedInStatus();
@@ -161,8 +162,8 @@ export class UserService {
 
     const options = {
       user_id,
+      oldPassword: inputData.oldPassword,
       password: inputData.password,
-      newPassword: inputData.newPassword,
     };
     return this.http
       .put(`${this.baseURL}/users/password/change`, { ...options }, { headers })

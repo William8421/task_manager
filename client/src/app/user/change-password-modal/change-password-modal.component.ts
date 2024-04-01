@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UserService } from 'src/app/service/user.service';
 
@@ -7,10 +14,11 @@ import { UserService } from 'src/app/service/user.service';
   templateUrl: './change-password-modal.component.html',
   styleUrls: ['./change-password-modal.component.scss'],
 })
-export class ChangePasswordModalComponent {
+export class ChangePasswordModalComponent implements OnInit {
   @Output() changePasswordCanceled = new EventEmitter<void>();
   @Output() refreshUser = new EventEmitter<void>();
   @Output() profileResponse = new EventEmitter<string>();
+  @ViewChild('passwordInput') passwordInput!: ElementRef;
 
   hideOldPassword = false;
   hideNewPassword = false;
@@ -18,6 +26,11 @@ export class ChangePasswordModalComponent {
   errorMessage = '';
 
   constructor(private userService: UserService) {}
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.passwordInput.nativeElement.focus();
+    });
+  }
 
   // Close the change password modal
   closeChangePasswordModal() {
@@ -27,9 +40,9 @@ export class ChangePasswordModalComponent {
   // Handle password change
   changePassword(inputData: NgForm) {
     if (inputData.valid) {
-      const newPassword = inputData.value.newPassword;
+      const password = inputData.value.password;
       const confirmNewPassword = inputData.value.confirmNewPassword;
-      if (newPassword !== confirmNewPassword) {
+      if (password !== confirmNewPassword) {
         this.errorMessage = 'Password and confirm password do not match.';
         return;
       }
@@ -40,7 +53,7 @@ export class ChangePasswordModalComponent {
         },
         error: (err) => {
           console.error(err);
-          this.errorMessage = err.error;
+          this.errorMessage = err.error.errors[0].msg;
         },
       });
     } else {

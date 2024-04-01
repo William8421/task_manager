@@ -6,7 +6,7 @@
         <form #editForm="ngForm" (submit)="editProfile(editForm)">
             <div class="input-container">
                 <label for="username">New Username</label>
-                <input type="text" name="username" autocomplete="username" [(ngModel)]="user.username">
+                <input #usernameInput type="text" name="username" autocomplete="username" [(ngModel)]="user.username">
             </div>
             <div class="input-container">
                 <label for="first_name">New First Name</label>

@@ -29,8 +29,8 @@ export interface SignUpInputProps {
   profile_picture?: string;
 }
 export interface ChangePasswordProps {
+  oldPassword: string;
   password: string;
-  newPassword: string;
   confirmPassword: string;
 }
 

@@ -203,7 +203,7 @@ export const updateUser = async (req: Request, res: Response) => {
 
 // Change user password
 export const changePassword = async (req: Request, res: Response) => {
-  const { user_id, password, newPassword } = req.body;
+  const { user_id, oldPassword, password } = req.body;
 
   try {
     // Validate the new password
@@ -222,18 +222,18 @@ export const changePassword = async (req: Request, res: Response) => {
       return sendErrorResponse(res, 404, "User not found");
     }
 
-    if (password === newPassword) {
+    if (password === oldPassword) {
       return sendErrorResponse(res, 401, "You can't use the same password");
     }
 
     // Verify the current password
-    const passwordMatch = await bcrypt.compare(password, user.password);
+    const passwordMatch = await bcrypt.compare(oldPassword, user.password);
     if (!passwordMatch) {
       return sendErrorResponse(res, 401, "Incorrect password");
     }
 
     // Hash the new password
-    const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+    const hashedNewPassword = await bcrypt.hash(password, 10);
 
     // Update the user's password in the database
     await pool.query("UPDATE users SET password = $1 WHERE user_id = $2", [

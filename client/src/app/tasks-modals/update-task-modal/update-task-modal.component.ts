@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { TaskService } from 'src/app/service/task.service';
 import { TaskProps, TaskResponseProps } from 'src/types/taskTypes';
@@ -8,18 +16,24 @@ import { TaskProps, TaskResponseProps } from 'src/types/taskTypes';
   templateUrl: './update-task-modal.component.html',
   styleUrls: ['./update-task-modal.component.scss'],
 })
-export class UpdateTaskModalComponent {
+export class UpdateTaskModalComponent implements OnInit {
   // Event emitters
   @Input() task: TaskProps | null = null;
-  @Output() updateCanceled = new EventEmitter<void>();
+  @Output() toggleUpdateModal = new EventEmitter<void>();
   @Output() refreshTasks = new EventEmitter<void>();
   @Output() responseMessage = new EventEmitter<string>();
+  @ViewChild('titleInput') titleInput!: ElementRef;
 
   constructor(private taskService: TaskService) {}
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.titleInput.nativeElement.focus();
+    });
+  }
 
   // Close update task modal
   closeUpdateModal() {
-    this.updateCanceled.emit();
+    this.toggleUpdateModal.emit();
   }
 
   // Update a task

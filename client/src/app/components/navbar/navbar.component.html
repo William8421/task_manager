@@ -1,5 +1,5 @@
 <div class="navbar-container" [class.scroll-background]="isScrolled">
-    <div class="navbar-backdrop" *ngIf="menu" (click)="toggleSwitcher()"></div>
+    <div class="navbar-backdrop backdrop" *ngIf="menu" (click)="toggleSwitcher()"></div>
     <div class="bar-button-container">
         <div class="burger-button-icon">
             <div class='bar-button' (click)="toggleSwitcher()">
@@ -17,19 +17,26 @@
             </div>
         </div>
         <div class="app-name">
-            <h2>Task Manager</h2>
+            <a routerLink="/">
+                <h2>Task Manager</h2>
+            </a>
         </div>
     </div>
     <div [class.menu-on]="menu" class='menu-off'>
         <div class='routes-container'>
             <button class="close-navbar" (click)="toggleSwitcher()">&times;</button>
-            <a routerLink=""><button (click)="toggleSwitcher()">Home</button></a>
-            <a routerLink="myprofile"><button (click)="toggleSwitcher()">My profile</button></a>
-            <a routerLink="tasks"><button (click)="toggleSwitcher()">My tasks</button></a>
-            <a routerLink="about"><button (click)="toggleSwitcher()">About</button></a>
+            <a [class.active]="isActive('/')" routerLink=""><button (click)="toggleSwitcher()">Home</button></a>
+            <a [class.active]="isActive('/myprofile')" routerLink="myprofile"><button (click)="toggleSwitcher()">My
+                    profile</button></a>
+            <a [class.active]="isActive('/tasks')" routerLink="tasks"><button (click)="toggleSwitcher()">My
+                    tasks</button></a>
+            <a [class.active]="isActive('/about')" routerLink="about"><button
+                    (click)="toggleSwitcher()">About</button></a>
             <div *ngIf="!isLoggedIn" class='auth-container'>
-                <a routerLink="login"><button (click)="toggleSwitcher()">Login</button></a>
-                <a routerLink="signup"><button (click)="toggleSwitcher()">Sign up</button></a>
+                <a [class.active]="isActive('/login')" routerLink="login"><button
+                        (click)="toggleSwitcher()">Login</button></a>
+                <a [class.active]="isActive('/signup')" routerLink="signup"><button (click)="toggleSwitcher()">Sign
+                        up</button></a>
             </div>
             <div *ngIf="isLoggedIn" class='auth-container'><button (click)="logOut()">Logout</button>
             </div>

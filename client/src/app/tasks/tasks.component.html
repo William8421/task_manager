@@ -1,65 +1,16 @@
 <div class="tasks-container">
-    <div class="backdrop" *ngIf="showCreateModal || showUpdateModal || showDeleteModal" (click)="closeBackdrop()"></div>
+    <div class="backdrop" *ngIf="showCreateModal" (click)="closeBackdrop()"></div>
     <h1>My tasks</h1>
     <p class="response-message" *ngIf="responseMessage">{{ responseMessage }}</p>
     <div class="tasks" *ngIf="isLoggedIn; else loginMessage">
-        <button class="main-button" (click)="openCreateModal()">New task</button>
-        <div class="task" *ngFor="let task of tasks">
-            <div class="task-body" [class.canceled]="isTaskCancelled(task)">
-                <div class="task-header" *ngIf="moreLessTask !== task" [class.completed]="isTaskCompleted(task)"
-                    [class.overdue]="isTaskOverdue(task)">
-                    <p class="title">
-                        {{task.title}}
-                    </p>
-                    <div class="action-buttons-container">
-                        <div class="arrows-container">
-                            <i (click)="showMoreDetails(task)"
-                                [class]="moreLessTask === task? 'fa-solid fa-angles-up' : 'fa-solid fa-angles-down'"></i>
-                        </div>
-                        <!-- <button class="cancel-button" (click)="openDeleteModal(task)">Delete</button> -->
-                        <i class="fa-solid fa-trash-can" (click)="openDeleteModal(task)"></i>
-                        <!-- <button class="main-button" (click)="openUpdateModal(task)">Update</button> -->
-                        <i class="fa-solid fa-pen" (click)="openUpdateModal(task)"></i>
-                    </div>
-                </div>
-                <div class="more-information" *ngIf=" moreLessTask === task">
-                    <p class="title-description"><strong>Title: </strong>
-                        <span>{{task.title}}</span>
-                    </p>
-                    <p class="title-description"><strong>Description: </strong> <span>{{task.description}} </span></p>
-                    <p><strong>Status: </strong> <span>{{task.status}} </span></p>
-                    <p [class.overdue]="isTaskOverdue(task)"><strong>Due Date at: </strong> <span>{{task.due_date |
-                            date:
-                            'dd.MM.yyyy'}}
-                        </span></p>
-                    <p><strong>Created at: </strong> <span>{{task.created_at | date: 'dd.MM.yyyy'}} </span></p>
-                    <p *ngIf="task.updated_at"><strong>Updated at: </strong> <span>
-                            {{task.updated_at | date: 'dd.MM.yyyy'}} </span> </p>
-                    <div class="action-buttons-container">
-                        <button class="cancel-button" (click)="openDeleteModal(task)">Delete</button>
-                        <button class="main-button" (click)="openUpdateModal(task)">Update</button>
-                    </div>
-                    <div class="arrows-container">
-                        <i (click)="showMoreDetails(task)"
-                            [class]="moreLessTask === task? 'fa-solid fa-angles-up' : 'fa-solid fa-angles-down'"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <button class="main-button" (click)="toggleCreateModal()">New task</button>
+        <app-task [tasks]="tasks"></app-task>
 
     </div>
     <ng-template #loginMessage>
         <p>Please <span class="redirect" (click)="redirectToLogin()">Login</span> to see your tasks</p>
     </ng-template>
-    <app-update-task-modal *ngIf="showUpdateModal" [task]="selectedTask"
-        (responseMessage)="handleResponseMessageChange($event)" (updateCanceled)="closeUpdateModal()"
-        (refreshTasks)="getUserTasks()">
-    </app-update-task-modal>
-    <app-delete-task-modal *ngIf="showDeleteModal" [task]="selectedTask"
-        (responseMessage)="handleResponseMessageChange($event)" (deleteCanceled)="closeDeleteModal()"
-        (refreshTasks)="getUserTasks()">
-    </app-delete-task-modal>
-    <app-create-task-modal *ngIf="showCreateModal" (createCanceled)="closeCreateModal()"
+    <app-create-task-modal *ngIf="showCreateModal" (toggleCreateModal)="toggleCreateModal()"
         (responseMessage)="handleResponseMessageChange($event)" (refreshTasks)="getUserTasks()">
     </app-create-task-modal>
 </div>

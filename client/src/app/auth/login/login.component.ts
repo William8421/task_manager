@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../../service/user.service';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -12,6 +12,7 @@ import { UserResponseProps } from 'src/types/userTypes';
 export class LoginComponent implements OnInit {
   isLoggedIn = false;
   hide = false;
+  @ViewChild('emailInput') emailInput!: ElementRef;
 
   constructor(private userService: UserService, private router: Router) {
     // Subscribe to the isLoggedIn$ Observable to update isLoggedIn value
@@ -25,6 +26,12 @@ export class LoginComponent implements OnInit {
     if (this.isLoggedIn) {
       this.router.navigate(['']);
     }
+    // focus email input on in it
+    setTimeout(() => {
+      if (this.emailInput) {
+        this.emailInput.nativeElement.focus();
+      }
+    });
   }
 
   errorMessage = '';

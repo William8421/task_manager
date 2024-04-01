@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { TaskService } from 'src/app/service/task.service';
 import { TaskResponseProps } from 'src/types/taskTypes';
@@ -8,19 +15,25 @@ import { TaskResponseProps } from 'src/types/taskTypes';
   templateUrl: './create-task-modal.component.html',
   styleUrls: ['./create-task-modal.component.scss'],
 })
-export class CreateTaskModalComponent {
+export class CreateTaskModalComponent implements OnInit {
   // Event emitters
-  @Output() createCanceled = new EventEmitter<void>();
+  @Output() toggleCreateModal = new EventEmitter<void>();
   @Output() refreshTasks = new EventEmitter<void>();
   @Output() responseMessage = new EventEmitter<string>();
+  @ViewChild('titleInput') titleInput!: ElementRef;
 
   requiredError = '';
 
   constructor(private taskService: TaskService) {}
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.titleInput.nativeElement.focus();
+    });
+  }
 
   // close create task modal
   closeCreateModal() {
-    this.createCanceled.emit();
+    this.toggleCreateModal.emit();
   }
 
   // create a new task

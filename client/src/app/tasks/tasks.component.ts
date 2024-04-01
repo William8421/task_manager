@@ -12,13 +12,7 @@ export class TasksComponent {
   isLoggedIn = false;
   tasks: TaskProps[] = [];
   responseMessage = '';
-
-  // Modals for task operations
-  selectedTask: TaskProps | null = null;
-  moreLessTask: TaskProps | null = null;
   showCreateModal = false;
-  showUpdateModal = false;
-  showDeleteModal = false;
 
   constructor(private taskService: TaskService, private router: Router) {
     // Subscribe to the isLoggedIn$ Observable from TaskService to update isLoggedIn value
@@ -49,49 +43,14 @@ export class TasksComponent {
     });
   }
 
-  // Open create task modal
-  openCreateModal() {
-    this.showCreateModal = true;
-  }
-
-  // Close create task modal
-  closeCreateModal() {
-    this.showCreateModal = false;
-  }
-
-  showMoreDetails(task: TaskProps) {
-    // Toggle visibility of details for the selected task
-    this.moreLessTask = this.moreLessTask === task ? null : task;
-  }
-
-  // Open update task modal
-  openUpdateModal(task: TaskProps) {
-    this.selectedTask = task;
-    this.showUpdateModal = true;
-  }
-
-  // Close update task modal
-  closeUpdateModal() {
-    this.selectedTask = null;
-    this.showUpdateModal = false;
-  }
-
-  // Open delete task modal
-  openDeleteModal(task: TaskProps) {
-    this.selectedTask = task;
-    this.showDeleteModal = true;
-  }
-
-  // Close delete task modal
-  closeDeleteModal() {
-    this.showDeleteModal = false;
+  // Open close create task modal
+  toggleCreateModal() {
+    this.showCreateModal = !this.showCreateModal;
   }
 
   // Close all modals/backdrop
   closeBackdrop() {
     this.showCreateModal = false;
-    this.showUpdateModal = false;
-    this.showDeleteModal = false;
   }
 
   // Redirect to login page
@@ -105,23 +64,5 @@ export class TasksComponent {
     setTimeout(() => {
       this.responseMessage = '';
     }, 2000);
-  }
-
-  // Check if task's due date has passed
-  isTaskOverdue(task: TaskProps): boolean {
-    const { status, due_date } = task;
-    const dueDate = new Date(due_date);
-    const currentDate = new Date();
-    if (status === 'pending') {
-      return dueDate < currentDate;
-    }
-    return false;
-  }
-
-  isTaskCancelled(task: TaskProps): boolean {
-    return task.status === 'cancelled';
-  }
-  isTaskCompleted(task: TaskProps): boolean {
-    return task.status === 'completed';
   }
 }

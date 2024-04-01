@@ -10,7 +10,7 @@ import { TaskProps, TaskResponseProps } from 'src/types/taskTypes';
 export class DeleteTaskModalComponent {
   // Event emitters
   @Input() task: TaskProps | null = null;
-  @Output() deleteCanceled = new EventEmitter<void>();
+  @Output() toggleDeleteModal = new EventEmitter<void>();
   @Output() refreshTasks = new EventEmitter<void>();
   @Output() responseMessage = new EventEmitter<string>();
 
@@ -18,7 +18,7 @@ export class DeleteTaskModalComponent {
 
   // close delete task modal
   closeDeleteModal() {
-    this.deleteCanceled.emit();
+    this.toggleDeleteModal.emit();
   }
 
   // delete a task

@@ -70,10 +70,40 @@
   }
 }
 
-@media (min-width: 576px) {
+@media screen and (min-width: $SMALL_SCREEN) {
   .home-container {
     .home-background {
       height: 80vh;
+    }
+  }
+}
+
+@media screen and (min-width: $MEDIUM_SCREEN) {
+  .home-container {
+    .home-background {
+      h2 {
+        width: 55%;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $LARGE_SCREEN) {
+  .home-container {
+    .home-background {
+      h2 {
+        width: 45%;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $EXTRA_LARGE_SCREEN) {
+  .home-container {
+    .home-background {
+      h2 {
+        width: 35%;
+      }
     }
   }
 }

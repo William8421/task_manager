@@ -64,4 +64,9 @@ export class NavbarComponent implements OnInit {
     // Navigate to profile page
     this.router.navigate(['myprofile']);
   }
+
+  // show the active route
+  isActive(route: string): boolean {
+    return this.router.url === route;
+  }
 }

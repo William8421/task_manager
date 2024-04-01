@@ -18,6 +18,7 @@ import { CreateTaskModalComponent } from './tasks-modals/create-task-modal/creat
 import { EditProfileModalComponent } from './user/edit-profile-modal/edit-profile-modal.component';
 import { ChangePasswordModalComponent } from './user/change-password-modal/change-password-modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TaskComponent } from './tasks/task/task.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CreateTaskModalComponent,
     EditProfileModalComponent,
     ChangePasswordModalComponent,
+    TaskComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UserService } from 'src/app/service/user.service';
 import { environment } from 'src/environments/environment';
@@ -13,11 +21,12 @@ import {
   templateUrl: './edit-profile-modal.component.html',
   styleUrls: ['./edit-profile-modal.component.scss'],
 })
-export class EditProfileModalComponent {
+export class EditProfileModalComponent implements OnInit {
   @Input() user: UserProps | null = null;
   @Output() editCanceled = new EventEmitter<void>();
   @Output() refreshUser = new EventEmitter<void>();
   @Output() profileResponse = new EventEmitter<string>();
+  @ViewChild('usernameInput') usernameInput!: ElementRef;
 
   selectedFile: File | null = null;
   selectedImage = '';
@@ -30,6 +39,11 @@ export class EditProfileModalComponent {
   uploadFolder = environment.cloudinaryUploadFolder;
 
   constructor(private userService: UserService) {}
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.usernameInput.nativeElement.focus();
+    });
+  }
 
   selectFile() {
     const fileInput = document.getElementById('profile_picture');

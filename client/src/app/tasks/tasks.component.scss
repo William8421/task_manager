@@ -6,82 +6,11 @@
   gap: 3rem;
   font-size: 1.2rem;
   button {
-    width: fit-content;
     align-self: center;
+    margin-bottom: 2rem;
   }
   .tasks {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+    text-align: center;
     width: 100%;
-    .task {
-      .task-body {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-        padding-right: 1rem;
-        .task-header {
-          border-bottom: solid 1px $MAIN_COLOR;
-          @include ROW_JUSTIFY_BETWEEN;
-          align-items: flex-end;
-          max-width: 100%;
-          padding: 0 0.5rem;
-          border-bottom: solid 1px $MAIN_COLOR;
-          .title {
-            width: 150px;
-            margin: 0;
-            display: inline-block;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            text-align: left;
-          }
-        }
-        .action-buttons-container {
-          display: flex;
-          justify-content: space-around;
-          gap: 1rem;
-          margin-left: auto;
-        }
-        .more-information {
-          background-color: white;
-          border-radius: 16px;
-          width: 80%;
-          margin: 0 auto;
-          text-align: center;
-          p {
-            display: flex;
-            justify-content: space-around;
-          }
-          .title-description {
-            flex-direction: column;
-            align-items: center;
-            width: 80%;
-            margin: 0 auto;
-            margin-top: 1rem;
-          }
-        }
-      }
-    }
   }
-  .overdue {
-    color: red;
-  }
-  .canceled {
-    color: grey;
-    opacity: 0.5;
-  }
-
-  .completed {
-    color: green;
-  }
-}
-
-.arrows-container {
-  margin: 0 auto;
-  width: 1.7rem;
-  height: 1.7rem;
-  border: solid 1px $MAIN_COLOR;
-  border-radius: 50%;
-  @include ROW_JUSTIFY_CENTER;
 }

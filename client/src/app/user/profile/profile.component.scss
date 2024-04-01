@@ -4,26 +4,89 @@
   padding-bottom: 2rem;
   @include COLUMN_ALIGN_CENTER;
   gap: 3rem;
-  .user {
+  .user-container {
+    @include COLUMN_ALIGN_CENTER;
     margin: 0 auto;
     width: 80%;
-    @include COLUMN_ALIGN_CENTER;
     gap: 1rem;
-    .profile-picture-container {
-      img {
-        display: block;
-        width: 200px;
+    .user {
+      @include COLUMN_ALIGN_CENTER;
+      .profile-picture-container {
+        img {
+          margin: 0 auto;
+          display: block;
+          width: 90%;
+          border-radius: 16px;
+        }
+      }
+      .user-information {
+        width: 90%;
+        margin: 0 auto;
+        p {
+          @include ROW_JUSTIFY_BETWEEN;
+          width: 100%;
+          margin: 1rem 0;
+        }
+        .change-password-button {
+          text-decoration: underline;
+          color: $MAIN_COLOR;
+        }
       }
     }
-    .user-information {
-      p {
-        @include ROW_JUSTIFY_BETWEEN;
-        width: 100%;
-        margin: 1rem 0;
+  }
+}
+
+@media screen and (min-width: $SMALL_SCREEN) {
+  .profile-container {
+    .user-container {
+      .user {
+        .user-information {
+          width: 90%;
+        }
       }
-      .change-password-button {
-        text-decoration: underline;
-        color: $MAIN_COLOR;
+    }
+  }
+}
+
+@media screen and (min-width: $MEDIUM_SCREEN) {
+  .profile-container {
+    .user-container {
+      .user {
+        flex-direction: row;
+        width: 90%;
+        .user-information {
+          width: 70%;
+          padding: 0 2rem;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $LARGE_SCREEN) {
+  .profile-container {
+    .user-container {
+      .user {
+        width: 70%;
+        .profile-picture-container {
+          img {
+            width: 80%;
+          }
+        }
+        .user-information {
+          width: 65%;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $EXTRA_LARGE_SCREEN) {
+  .profile-container {
+    .user-container {
+      gap: 0;
+      .user {
+        width: 50%;
       }
     }
   }

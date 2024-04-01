@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/service/user.service';
@@ -21,6 +21,7 @@ export class SignupComponent implements OnInit {
   imageName = '';
   selectedImage = '';
   selectedFile: File | null = null;
+  @ViewChild('usernameInput') usernameInput!: ElementRef;
 
   // Cloudinary upload parameters
   uploadPreset = environment.cloudinaryUploadPreset;
@@ -39,6 +40,12 @@ export class SignupComponent implements OnInit {
     if (this.isLoggedIn) {
       this.router.navigate(['']);
     }
+    // focus username input on in it
+    setTimeout(() => {
+      if (this.usernameInput) {
+        this.usernameInput.nativeElement.focus();
+      }
+    });
   }
 
   selectFile() {

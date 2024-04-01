@@ -3,7 +3,7 @@
     <form #loginForm="ngForm" (submit)="login(loginForm)">
         <div class="input-container">
             <label for="email">Email <span class="required-marker">*</span></label>
-            <input type="email" name="email" autocomplete="email" required ngModel>
+            <input #emailInput type="email" name="email" autocomplete="email" required ngModel>
         </div>
         <div class="input-container">
             <label for="password">Password <span class="required-marker">*</span></label>

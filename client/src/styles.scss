@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Playfair+Display:ital,wght@0,400;0,600;1,500&display=swap");
 @import "./_Variables.scss";
+@import "./_Navbar";
 
 * {
   box-sizing: border-box;
@@ -63,7 +64,7 @@ body {
   padding: 1rem 0;
   @include COLUMN_ALIGN_CENTER;
   gap: 1rem;
-  width: 90%;
+  width: 350px;
   font-size: 1.2rem;
   .modal-header {
     color: black;
@@ -79,6 +80,11 @@ body {
       @include COLUMN_ALIGN_CENTER;
       p {
         text-align: center;
+        line-height: 2rem;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border: solid 1px black;
+        border-radius: 16px;
         span {
           color: red;
           text-decoration: underline;
@@ -110,6 +116,7 @@ body {
           padding: 1rem 0.5rem;
           width: 90%;
           resize: none;
+          font-size: 1rem;
         }
         input[type="date"] {
           width: 15rem;
@@ -160,4 +167,5 @@ body {
   position: fixed;
   top: 8%;
   right: 5%;
+  opacity: 0.5;
 }
