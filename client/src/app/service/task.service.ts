@@ -100,8 +100,6 @@ export class TaskService {
 
     const taskData = { user_id: userData.id, task_id: taskId };
 
-    console.log('service', inputData);
-
     return this.http
       .put<TaskProps>(
         `${this.baseURL}/tasks/task/update`,

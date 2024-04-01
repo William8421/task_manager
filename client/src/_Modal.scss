@@ -1,0 +1,102 @@
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -45%);
+  background-color: $MODAL_BG_COLOR;
+  border-radius: 16px;
+  padding: 1rem 0;
+  z-index: 1;
+  @include COLUMN_ALIGN_CENTER;
+  gap: 1rem;
+  width: 350px;
+  font-size: 1.2rem;
+  .modal-header {
+    color: black;
+    h2 {
+      margin: 0;
+    }
+  }
+  .modal-content {
+    margin: 1rem;
+
+    form,
+    .delete-body {
+      @include COLUMN_ALIGN_CENTER;
+      p {
+        text-align: center;
+        line-height: 2rem;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border: solid 1px black;
+        border-radius: 16px;
+        span {
+          color: red;
+          text-decoration: underline;
+        }
+      }
+      .input-container {
+        margin: 1rem;
+        @include COLUMN_ALIGN_CENTER;
+        width: 90%;
+        label {
+          span {
+            color: red;
+          }
+        }
+        input,
+        select {
+          width: 90%;
+          border: none;
+          border-radius: 6px;
+          font-size: 1.2rem;
+        }
+        input[type="file"] {
+          display: none;
+        }
+        textarea {
+          border: none;
+          border-radius: 16px;
+          padding: 1rem 0.5rem;
+          width: 90%;
+          resize: none;
+          font-size: 1rem;
+        }
+        input[type="date"] {
+          width: 15rem;
+        }
+        .picture-button-container {
+          @include ROW_JUSTIFY_BETWEEN;
+          max-width: 80%;
+          .image-name {
+            width: 200px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+          }
+        }
+        .eye-icon {
+          position: absolute;
+          top: 50%;
+          right: 5%;
+        }
+      }
+      .modal-footer {
+        display: flex;
+        justify-content: space-around;
+        gap: 1rem;
+        width: 80%;
+      }
+    }
+  }
+}
+.backdrop {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  opacity: 0.5;
+  z-index: 0;
+}

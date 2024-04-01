@@ -12,7 +12,13 @@ export class TasksComponent {
   isLoggedIn = false;
   tasks: TaskProps[] = [];
   responseMessage = '';
+
+  // Modals for task operations
+  selectedTask: TaskProps | null = null;
+  moreLessTask: TaskProps | null = null;
   showCreateModal = false;
+  showUpdateModal = false;
+  showDeleteModal = false;
 
   constructor(private taskService: TaskService, private router: Router) {
     // Subscribe to the isLoggedIn$ Observable from TaskService to update isLoggedIn value
@@ -48,9 +54,29 @@ export class TasksComponent {
     this.showCreateModal = !this.showCreateModal;
   }
 
+  showMoreDetails(task: TaskProps) {
+    // Toggle visibility of details for the selected task
+    this.moreLessTask = this.moreLessTask === task ? null : task;
+  }
+
+  // Open close update task modal
+  toggleUpdateModal(task: TaskProps) {
+    this.selectedTask = task;
+    this.showUpdateModal = !this.showUpdateModal;
+  }
+
+  // Open Close delete task modal
+  toggleDeleteModal(task: TaskProps) {
+    this.selectedTask = task;
+    this.showDeleteModal = !this.showDeleteModal;
+  }
+
   // Close all modals/backdrop
   closeBackdrop() {
     this.showCreateModal = false;
+    this.showUpdateModal = false;
+    this.showDeleteModal = false;
+    console.log('khgjkhjjkhb');
   }
 
   // Redirect to login page
@@ -64,5 +90,23 @@ export class TasksComponent {
     setTimeout(() => {
       this.responseMessage = '';
     }, 2000);
+  }
+
+  // Check if task's due date has passed
+  isTaskOverdue(task: TaskProps): boolean {
+    const { status, due_date } = task;
+    const dueDate = new Date(due_date);
+    const currentDate = new Date();
+    if (status === 'Pending' || status === 'In progress') {
+      return dueDate < currentDate;
+    }
+    return false;
+  }
+
+  isTaskCancelled(task: TaskProps): boolean {
+    return task.status === 'Cancelled';
+  }
+  isTaskCompleted(task: TaskProps): boolean {
+    return task.status === 'Completed';
   }
 }
