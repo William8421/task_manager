@@ -7,8 +7,6 @@
   font-size: 1.2rem;
   button {
     align-self: center;
-    margin-bottom: 2rem;
-    cursor: pointer;
   }
   .tasks {
     text-align: center;
@@ -29,20 +27,6 @@
   .completed {
     color: green;
   }
-}
-
-.arrows-container,
-.arrows-container-large {
-  margin: 0 auto;
-  width: 1.7rem;
-  height: 1.7rem;
-  border: solid 1px $MAIN_COLOR;
-  border-radius: 50%;
-  @include ROW_JUSTIFY_CENTER;
-  cursor: pointer;
-}
-.arrows-container-large {
-  display: none;
 }
 
 @media screen and (min-width: $SMALL_SCREEN) {
@@ -99,10 +83,6 @@
             margin-left: 0;
             width: 50%;
           }
-          .action-buttons-container {
-            justify-content: center;
-            gap: 2rem;
-          }
           .more-information {
             width: 40%;
             align-items: center;
@@ -112,13 +92,13 @@
           }
         }
       }
+      .arrows-container {
+        display: none;
+      }
+      .arrows-container-large {
+        display: flex;
+      }
     }
-  }
-  .arrows-container {
-    display: none;
-  }
-  .arrows-container-large {
-    display: flex;
   }
 }
 

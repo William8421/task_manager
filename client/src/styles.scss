@@ -27,12 +27,14 @@ body {
 }
 
 .cancel-button,
-.main-button {
+.main-button,
+.delete-button {
   background-color: transparent;
   border: none;
   border-radius: 16px;
   font-size: 1.3rem;
   padding: 0.5rem 1rem;
+  cursor: pointer;
 }
 
 .main-button {
@@ -43,12 +45,15 @@ body {
 .main-button:disabled {
   color: #989494;
   border: solid 1px #989494;
-  cursor: pointer;
+}
+.delete-button {
+  color: red;
+  border: solid 1px red;
 }
 
 .cancel-button {
-  border: solid 1px red;
-  color: red;
+  border: solid 1px grey;
+  color: grey;
 }
 
 .fa-solid {

@@ -11,8 +11,8 @@
                 undone.
             </p>
             <div class="modal-footer" *ngIf="task">
-                <button class="main-button" (click)="deleteTask(task)">Delete</button>
                 <button class="cancel-button" (click)="closeDeleteModal()">Cancel</button>
+                <button class="delete-button" (click)="deleteTask(task)">Delete</button>
             </div>
         </div>
     </div>

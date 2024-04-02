@@ -28,8 +28,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="main-button" [disabled]="selectedFile && selectedImage === ''">Update</button>
                 <button class="cancel-button" type="button" (click)="closeEditModal()">Cancel</button>
+                <button class="main-button" [disabled]="selectedFile && selectedImage === ''">Update</button>
             </div>
         </form>
         <p class="error-message" *ngIf="errorMessage">{{errorMessage}}</p>

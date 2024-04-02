@@ -40,10 +40,10 @@
                                 at {{task.updated_at | date: 'dd.MM.yyyy on HH:mm'}} </span> </p>
                     </div>
                     <div class="action-buttons-container">
+                        <button class="delete-button" (click)="toggleDeleteModal(task)">Delete</button>
                         <button class="main-button" (click)="toggleUpdateModal(task)">Update</button>
-                        <button class="cancel-button" (click)="toggleDeleteModal(task)">Delete</button>
                     </div>
-                    <div class="arrows-container close-more-details">
+                    <div class="arrows-container">
                         <i (click)="showMoreDetails(task)"
                             [class]="moreLessTask === task? 'fa-solid fa-angles-up' : 'fa-solid fa-angles-down'"></i>
                     </div>
