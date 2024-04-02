@@ -1,0 +1,251 @@
+.about-container {
+  padding: 1rem;
+  padding-top: 4rem;
+  background-color: $MAIN_COLOR;
+  color: white;
+  .about-sub-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    h5 {
+      text-align: center;
+    }
+    p {
+      display: flex;
+      flex-direction: column;
+      padding-top: 0.5rem;
+      span {
+        padding: 0.5rem 0;
+      }
+    }
+    h2 {
+      margin-bottom: 1rem;
+    }
+
+    .key-features {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      p {
+        strong {
+          display: flex;
+          align-items: center;
+          i {
+            color: white;
+            font-size: 2rem;
+            padding-right: 0.5rem;
+          }
+        }
+      }
+      .tasks-img-container {
+        display: none;
+      }
+    }
+
+    .technologies {
+      .techs-container {
+        @include COLUMN_ALIGN_CENTER;
+        gap: 1rem;
+        .tech {
+          padding: 0 0.5rem;
+          border-radius: 0 26px 0 26px;
+          p {
+            color: black;
+            -webkit-text-stroke: 0.5px $MAIN_COLOR;
+            text-stroke: 0.5px $MAIN_COLOR;
+          }
+        }
+        .node {
+          background: radial-gradient(
+              circle,
+              rgba(255, 255, 255, 0.9) 0%,
+              rgba(207, 219, 232, 0.5) 100%
+            ),
+            url(./assets/nodejs.jpeg) center / cover no-repeat;
+        }
+        .postgres {
+          background: radial-gradient(
+              circle,
+              rgba(255, 255, 255, 0.9) 0%,
+              rgba(207, 219, 232, 0.5) 100%
+            ),
+            url(./assets/postgres-logo.png) left / cover no-repeat;
+        }
+        .angular {
+          background: radial-gradient(
+              circle,
+              rgba(255, 255, 255, 0.9) 0%,
+              rgba(207, 219, 232, 0.5) 100%
+            ),
+            url(./assets/angular.png) left / cover no-repeat;
+        }
+        .docker {
+          background: radial-gradient(
+              circle,
+              rgba(255, 255, 255, 0.9) 0%,
+              rgba(207, 219, 232, 0.5) 100%
+            ),
+            url(./assets/Docker_new.jpeg) left / cover no-repeat;
+        }
+      }
+    }
+
+    .AWS {
+      .aws-background {
+        img {
+          width: 100%;
+          border-radius: 0 26px 0 26px;
+        }
+      }
+    }
+    .footer {
+      background-color: $BG_COLOR;
+      color: $MAIN_COLOR;
+      padding: 0.5rem;
+      text-align: center;
+      border-radius: 0 26px 0 26px;
+    }
+  }
+}
+
+@media screen and (min-width: $SMALL_SCREEN) {
+  .about-container {
+    .about-sub-container {
+      h5 {
+        width: 80%;
+        text-align: left;
+      }
+      .key-features {
+        align-items: center;
+        gap: 1rem;
+        h2 {
+          align-self: flex-start;
+        }
+        .features-container {
+          display: flex;
+          justify-content: space-between;
+          gap: 1rem;
+          .tasks-img-container {
+            display: block;
+            align-self: center;
+            img {
+              width: 200px;
+              height: 360px;
+              object-fit: cover;
+              object-position: top;
+            }
+          }
+        }
+      }
+      .technologies {
+        .techs-container {
+          align-items: flex-start;
+          .tech {
+            width: 60%;
+          }
+          .postgres,
+          .docker {
+            align-self: flex-end;
+          }
+        }
+      }
+      .AWS {
+        .aws-background {
+          img {
+            width: 60%;
+          }
+        }
+        p {
+          width: 60%;
+        }
+      }
+      .footer {
+        width: 60%;
+        margin: 0 auto;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $MEDIUM_SCREEN) {
+  .about-container {
+    .about-sub-container {
+      h5 {
+        align-self: center;
+        text-align: center;
+      }
+      .key-features {
+        h2 {
+          align-self: center;
+        }
+      }
+      .technologies {
+        h2 {
+          text-align: center;
+        }
+        .techs-container {
+          flex-direction: row;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          .tech {
+            width: 40%;
+            min-height: 180px;
+          }
+        }
+      }
+      .AWS {
+        text-align: center;
+        .services-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $LARGE_SCREEN) {
+  .about-container {
+    .about-sub-container {
+      .key-features {
+        .features-container {
+          justify-content: space-around;
+          .features {
+            width: 50%;
+          }
+        }
+      }
+      .AWS {
+        .services-container {
+          flex-direction: row;
+          justify-content: space-around;
+          flex-wrap: wrap-reverse;
+          padding: 1rem;
+
+          p {
+            width: 40%;
+          }
+          .aws-background {
+            width: 40%;
+            img {
+              width: 80%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $EXTRA_LARGE_SCREEN) {
+  .about-container {
+    .about-sub-container {
+      margin: 0 auto;
+      width: 80%;
+      h5 {
+        width: 60%;
+      }
+    }
+  }
+}
