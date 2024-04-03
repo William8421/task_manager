@@ -16,14 +16,6 @@
       color: $MAIN_COLOR;
     }
   }
-  .about-header {
-    height: 20vh;
-    @include ROW_JUSTIFY_CENTER;
-    h2 {
-      color: $MAIN_COLOR;
-      margin-bottom: 3rem;
-    }
-  }
 }
 .top-bottom-button-container {
   text-align: center;
