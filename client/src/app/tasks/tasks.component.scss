@@ -23,6 +23,7 @@
       }
       .form-container {
         form {
+          text-align: center;
           input,
           select {
             border: none;
@@ -41,6 +42,9 @@
               padding: 0.1rem;
               border-radius: 0 6px 6px 0;
             }
+          }
+          .error-message {
+            margin-top: 1rem;
           }
         }
       }
@@ -113,6 +117,13 @@
         padding-left: 1rem;
         .filter-search-button {
           align-self: flex-start;
+        }
+        .form-container {
+          form {
+            .error-message {
+              text-align: left;
+            }
+          }
         }
       }
       .task {

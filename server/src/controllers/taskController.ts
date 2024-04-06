@@ -55,7 +55,7 @@ export const getAllTasks = async (req: Request, res: Response) => {
   }
 };
 
-// Get completed tasks
+// Get filtered tasks
 export const getFilteredTasks = async (req: Request, res: Response) => {
   const { user_id, filter } = req.body;
   try {

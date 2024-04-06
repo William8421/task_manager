@@ -25,7 +25,7 @@
                         <input type="search" id="searchTasks" name="title" ngModel>
                         <i class="fa-solid fa-magnifying-glass" (click)="searchTasksByTitle(searchQuery)"></i>
                     </div>
-                    <div *ngIf="errorMessage">{{errorMessage}}</div>
+                    <p class="error-message" *ngIf="errorMessage">{{errorMessage}}</p>
                 </form>
             </div>
         </div>
