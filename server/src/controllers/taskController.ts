@@ -55,6 +55,51 @@ export const getAllTasks = async (req: Request, res: Response) => {
   }
 };
 
+// Get completed tasks
+export const getFilteredTasks = async (req: Request, res: Response) => {
+  const { user_id, filter } = req.body;
+  try {
+    const completedTasks = await pool.query(
+      "SELECT * FROM tasks WHERE user_id = $1 AND status = $2",
+      [user_id, filter]
+    );
+    const filteredTasks = completedTasks.rows;
+
+    sendSuccessResponse(res, 200, filteredTasks);
+  } catch (err) {
+    console.error("Error fetching tasks:", err);
+    sendErrorResponse(res, 500, "Internal Server Error");
+  }
+};
+
+// search tasks by title
+export const searchTasksByTitle = async (req: Request, res: Response) => {
+  const { user_id, title } = req.body;
+
+  // Check if title is provided
+  if (!title) {
+    return sendErrorResponse(res, 400, "Title is required");
+  }
+
+  try {
+    // Use parameterized query to prevent SQL injection
+    const tasksQuery = await pool.query(
+      `SELECT * FROM tasks WHERE user_id = $1 AND title LIKE $2`,
+      [user_id, `%${title}%`]
+    );
+
+    if (tasksQuery.rows.length === 0) {
+      return sendErrorResponse(res, 404, "No tasks found");
+    }
+
+    const foundTasks = tasksQuery.rows;
+    return sendSuccessResponse(res, 200, foundTasks);
+  } catch (err) {
+    console.error("Error fetching tasks:", err);
+    return sendErrorResponse(res, 500, "Internal Server Error");
+  }
+};
+
 // Update task
 export const updateTask = async (req: Request, res: Response) => {
   const { task_id, title, description, due_date, status, user_id } = req.body;

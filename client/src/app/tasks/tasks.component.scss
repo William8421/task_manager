@@ -8,9 +8,43 @@
   button {
     align-self: center;
   }
+
   .tasks {
     text-align: center;
     width: 100%;
+    .filter-search-container {
+      margin-top: 1rem;
+      @include COLUMN_ALIGN_CENTER;
+      gap: 1rem;
+      .filter-search-button {
+        text-decoration: underline;
+        color: $MAIN_COLOR;
+        cursor: pointer;
+      }
+      .form-container {
+        form {
+          input,
+          select {
+            border: none;
+            border-radius: 6px;
+            font-size: 1.2rem;
+          }
+          div {
+            display: flex;
+            align-items: flex-end;
+            input {
+              border-radius: 6px 0 0 6px;
+            }
+            i {
+              background-color: $MAIN_COLOR;
+              color: white;
+              padding: 0.1rem;
+              border-radius: 0 6px 6px 0;
+            }
+          }
+        }
+      }
+    }
   }
   .overdue {
     color: red;
@@ -74,6 +108,13 @@
 @media screen and (min-width: $LARGE_SCREEN) {
   .tasks-container {
     .tasks {
+      .filter-search-container {
+        width: fit-content;
+        padding-left: 1rem;
+        .filter-search-button {
+          align-self: flex-start;
+        }
+      }
       .task {
         width: 100%;
         .task-body {

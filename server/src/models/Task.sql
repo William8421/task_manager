@@ -2,7 +2,7 @@ CREATE TABLE tasks (
     task_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     title VARCHAR(255) NOT NULL,
     description TEXT,
-    due_date DATE,
+    due_date TIMESTAMP,
     status VARCHAR(20) DEFAULT 'pending',
     user_id UUID,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

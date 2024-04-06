@@ -23,6 +23,7 @@ export class CreateTaskModalComponent implements OnInit {
   @ViewChild('titleInput') titleInput!: ElementRef;
 
   requiredError = '';
+  selectedTime: string = '';
 
   constructor(private taskService: TaskService) {}
   ngOnInit(): void {
@@ -40,7 +41,7 @@ export class CreateTaskModalComponent implements OnInit {
   createTask(newTaskForm: NgForm) {
     if (newTaskForm.valid) {
       if (!newTaskForm.value.status) {
-        newTaskForm.value.status = 'pending';
+        newTaskForm.value.status = 'Pending';
       }
       this.taskService.createTask(newTaskForm.value).subscribe({
         next: (item: TaskResponseProps) => {

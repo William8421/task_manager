@@ -25,7 +25,6 @@ export class UserService {
   userIcon$: Observable<string | null> = this.profileIconSubject.asObservable();
 
   baseURL = 'http://35.156.80.110:8000';
-  // baseURL = 'http://localhost:8000';
 
   constructor(private http: HttpClient) {
     this.checkLoggedInStatus();

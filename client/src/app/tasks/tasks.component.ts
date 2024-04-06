@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { TaskProps } from 'src/types/taskTypes';
 import { TaskService } from '../service/task.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-tasks',
@@ -12,8 +13,9 @@ export class TasksComponent {
   isLoggedIn = false;
   tasks: TaskProps[] = [];
   responseMessage = '';
+  errorMessage: string | null = null;
+  searchMode = false;
 
-  // Modals for task operations
   selectedTask: TaskProps | null = null;
   moreLessTask: TaskProps | null = null;
   showCreateModal = false;
@@ -21,7 +23,7 @@ export class TasksComponent {
   showDeleteModal = false;
 
   constructor(private taskService: TaskService, private router: Router) {
-    // Subscribe to the isLoggedIn$ Observable from TaskService to update isLoggedIn value
+    // Subscribe to isLoggedIn$ Observable from TaskService to update isLoggedIn value
     this.taskService.isLoggedIn$.subscribe((isLoggedIn) => {
       this.isLoggedIn = isLoggedIn;
       // Fetch tasks if user logged in
@@ -36,12 +38,10 @@ export class TasksComponent {
     this.taskService.getUserTasks().subscribe({
       next: (tasks: TaskProps[]) => {
         // Sort tasks by due date
-        this.tasks = tasks.sort((a, b) => {
-          const dateA = new Date(a.due_date);
-          const dateB = new Date(b.due_date);
-
-          return dateA.getTime() - dateB.getTime();
-        });
+        this.tasks = tasks.sort(
+          (a, b) =>
+            new Date(a.due_date).getTime() - new Date(b.due_date).getTime()
+        );
       },
       error: (err) => {
         console.error(err);
@@ -49,23 +49,65 @@ export class TasksComponent {
     });
   }
 
-  // Open close create task modal
+  // Filter tasks on status
+  getFilteredTasks(status: string) {
+    this.taskService.getFilteredTasks(status).subscribe({
+      next: (items: TaskProps[]) => {
+        this.tasks = items;
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+  }
+
+  // Filter tasks by status
+  filterTasksByStatus(status: NgForm) {
+    if (status.value.status === 'all') {
+      this.getUserTasks();
+    } else {
+      this.getFilteredTasks(status.value.status);
+    }
+  }
+
+  // Search tasks by title
+  searchTasksByTitle(searchQuery: NgForm) {
+    this.taskService.searchTasksByTitle(searchQuery.value.title).subscribe({
+      next: (tasks: TaskProps[]) => {
+        this.tasks = tasks;
+      },
+      error: (err) => {
+        console.error(err);
+        this.errorMessage = err.error;
+      },
+    });
+  }
+
+  // Toggle search mode
+  toggleSearchMode() {
+    this.searchMode = !this.searchMode;
+    if (!this.searchMode) {
+      this.getUserTasks();
+    }
+  }
+
+  // Toggle create task modal
   toggleCreateModal() {
     this.showCreateModal = !this.showCreateModal;
   }
 
+  // Show more details of task
   showMoreDetails(task: TaskProps) {
-    // Toggle visibility of details for the selected task
     this.moreLessTask = this.moreLessTask === task ? null : task;
   }
 
-  // Open close update task modal
+  // Toggle update task modal
   toggleUpdateModal(task: TaskProps) {
     this.selectedTask = task;
     this.showUpdateModal = !this.showUpdateModal;
   }
 
-  // Open Close delete task modal
+  // Toggle delete task modal
   toggleDeleteModal(task: TaskProps) {
     this.selectedTask = task;
     this.showDeleteModal = !this.showDeleteModal;
@@ -76,7 +118,6 @@ export class TasksComponent {
     this.showCreateModal = false;
     this.showUpdateModal = false;
     this.showDeleteModal = false;
-    console.log('khgjkhjjkhb');
   }
 
   // Redirect to login page
@@ -103,9 +144,12 @@ export class TasksComponent {
     return false;
   }
 
+  // Check if task is cancelled
   isTaskCancelled(task: TaskProps): boolean {
     return task.status === 'Cancelled';
   }
+
+  // Check if task is completed
   isTaskCompleted(task: TaskProps): boolean {
     return task.status === 'Completed';
   }

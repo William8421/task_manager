@@ -62,6 +62,45 @@ export class TaskService {
     );
   }
 
+  // get logged in user filtered tasks
+  getFilteredTasks(status: string): Observable<TaskProps[]> {
+    const userData = JSON.parse(localStorage.getItem('user') || '{}');
+    if (this.isTokenExpired(userData.token)) {
+      this.logOut();
+      return new Observable<TaskProps[]>();
+    }
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${userData.token}`,
+    });
+
+    return this.http.post<TaskProps[]>(
+      `${this.baseURL}/tasks/completed`,
+      { user_id: userData.id, filter: status },
+      { headers }
+    );
+  }
+
+  searchTasksByTitle(title: string): Observable<TaskProps[]> {
+    const userData = JSON.parse(localStorage.getItem('user') || '{}');
+    if (this.isTokenExpired(userData.token)) {
+      this.logOut();
+      return new Observable<TaskProps[]>();
+    }
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${userData.token}`,
+    });
+
+    return this.http.post<TaskProps[]>(
+      `${this.baseURL}/tasks/search`,
+      { user_id: userData.id, title },
+      { headers }
+    );
+  }
+
   // Creates a new task
   createTask(inputData: TaskProps): Observable<TaskResponseProps> {
     const userData = JSON.parse(localStorage.getItem('user') || '{}');

@@ -4,6 +4,31 @@
     <p class="response-message" *ngIf="responseMessage">{{ responseMessage }}</p>
     <div class="tasks" *ngIf="isLoggedIn; else loginMessage">
         <button class="main-button" (click)="toggleCreateModal()">New task</button>
+        <div class="filter-search-container">
+            <span class="filter-search-button" (click)="toggleSearchMode()">{{searchMode? 'Filter tasks' :
+                'Search tasks'}}</span>
+            <div class="form-container" *ngIf="!searchMode">
+                <form #selectFilter="ngForm" (change)="filterTasksByStatus(selectFilter)">
+                    <label for="statusFilter">Filter tasks:</label>
+                    <select id="statusFilter" name="status" ngModel>
+                        <option value="all">All</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Pending">Pending</option>
+                        <option value="In progress">In Progress</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                </form>
+            </div>
+            <div class="form-container" *ngIf="searchMode">
+                <form #searchQuery="ngForm" (submit)="searchTasksByTitle(searchQuery)">
+                    <div>
+                        <input type="search" id="searchTasks" name="title" ngModel>
+                        <i class="fa-solid fa-magnifying-glass" (click)="searchTasksByTitle(searchQuery)"></i>
+                    </div>
+                    <div *ngIf="errorMessage">{{errorMessage}}</div>
+                </form>
+            </div>
+        </div>
         <div class="task" *ngFor="let task of tasks">
             <div class="task-body" [class.canceled]="isTaskCancelled(task)">
                 <div class="task-header" [class.completed]="isTaskCompleted(task)"
@@ -32,12 +57,13 @@
                         <p><strong>Status: </strong> <span>{{task.status}} </span></p>
                         <p [class.overdue]="isTaskOverdue(task)"><strong>Due Date: </strong> <span>{{task.due_date |
                                 date:
-                                'dd.MM.yyyy'}}
+                                'dd.MM.yyyy HH:mm'}}
                             </span></p>
-                        <p><strong>Created: </strong> <span>at {{task.created_at | date: 'dd.MM.yyyy on HH:mm'}} </span>
+                        <p><strong>Created at: </strong> <span>{{task.created_at | date: 'dd.MM.yyyy HH:mm':'UTC+0400'}}
+                            </span>
                         </p>
-                        <p *ngIf="task.updated_at"><strong>Updated: </strong> <span>
-                                at {{task.updated_at | date: 'dd.MM.yyyy on HH:mm'}} </span> </p>
+                        <p *ngIf="task.updated_at"><strong>Updated at: </strong> <span>
+                                {{task.updated_at | date: 'dd.MM.yyyy HH:mm':'UTC+0400'}} </span> </p>
                     </div>
                     <div class="action-buttons-container">
                         <button class="delete-button" (click)="toggleDeleteModal(task)">Delete</button>
@@ -58,7 +84,6 @@
                 (refreshTasks)="getUserTasks()">
             </app-delete-task-modal>
         </div>
-
     </div>
     <ng-template #loginMessage>
         <p>Please <span class="redirect" (click)="redirectToLogin()">Login</span> to see your tasks</p>
