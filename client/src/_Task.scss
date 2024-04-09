@@ -1,75 +1,265 @@
-.task {
-  margin-top: 2rem;
-  .task-body {
-    .task-header {
-      @include ROW_JUSTIFY_BETWEEN;
-      align-items: flex-end;
-      padding: 0 1rem;
-      border-bottom: solid 1px $MAIN_COLOR;
-      .title {
-        margin: 0;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-    }
-    .action-icons-container {
-      display: flex;
-      justify-content: space-around;
-      gap: 1rem;
-      i {
-        cursor: pointer;
-      }
-      .arrows-container,
-      .arrows-container-large {
-        margin: 0 auto;
-        width: 1.3rem;
-        height: 1.3rem;
-        border: solid 1px $MAIN_COLOR;
-        border-radius: 50%;
-        @include ROW_JUSTIFY_CENTER;
-        cursor: pointer;
-      }
-      .arrows-container-large {
-        display: none;
-      }
-    }
+.tasks-container {
+  padding-top: 5rem;
+  padding-bottom: 3rem;
+  @include COLUMN_ALIGN_CENTER;
+  gap: 3rem;
+  font-size: 1.2rem;
+  button {
+    align-self: center;
+  }
 
-    .more-information {
-      padding: 1rem;
-      width: 90%;
-      margin: 0 auto;
-      .more-information-body {
-        background: url(./assets/lined-page.jpg) left / cover no-repeat;
+  .tasks {
+    text-align: center;
+    width: 100%;
+    .filter-search-container {
+      padding-top: 1rem;
+      .filter-search-button {
+        color: $MAIN_COLOR;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+      .form-container {
         padding: 1rem;
-        margin: 0 auto;
-        min-height: 390px;
-        p {
-          display: flex;
-          justify-content: space-between;
-          margin-top: 1rem;
-          width: 80%;
-          margin-left: auto;
-          font-size: 0.8rem;
-        }
-        .title {
-          width: 70%;
-          justify-content: center;
-          margin: 0 auto;
-          text-align: center;
-        }
-        .description {
-          flex-direction: column;
-          align-items: flex-start;
-          text-align: left;
+        form {
+          @include COLUMN_ALIGN_CENTER;
+          gap: 1rem;
+          input,
+          select {
+            border: none;
+            border-radius: 6px;
+            padding: 0.5rem;
+          }
+          input,
+          select:focus {
+            outline: none;
+          }
+          select {
+            min-width: 150px;
+          }
+          .search-input {
+            @include ROW_JUSTIFY_BETWEEN;
+            input {
+              border-radius: 6px 0 0 6px;
+            }
+            button {
+              background-color: transparent;
+              border: none;
+              i {
+                background-color: $MAIN_COLOR;
+                color: white;
+                padding: 0.3rem;
+                border-radius: 0 6px 6px 0;
+                font-size: 1.3rem;
+              }
+            }
+          }
         }
       }
-      .action-buttons-container {
-        max-width: 350px;
-        display: flex;
-        justify-content: space-around;
-        margin: 0 auto;
-        margin-top: 1rem;
+    }
+    .task {
+      margin-top: 2rem;
+      .task-body {
+        .task-header {
+          @include ROW_JUSTIFY_BETWEEN;
+          align-items: flex-end;
+          padding: 0 1rem;
+          border-bottom: solid 1px $MAIN_COLOR;
+          .title {
+            margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 120px;
+            text-align: left;
+          }
+          .overdue {
+            color: red;
+          }
+          .cancelled {
+            opacity: 0.5;
+            text-decoration: line-through;
+          }
+          .completed {
+            color: green;
+          }
+          .priority {
+            background-color: transparent;
+            padding: 0.2rem;
+            border-radius: 16px;
+            min-width: 80px;
+          }
+          .urgent {
+            border: solid 1px red;
+          }
+          .high {
+            border: solid 1px darkred;
+          }
+          .medium {
+            border: solid 1px orange;
+          }
+          .low {
+            border: solid 1px blue;
+          }
+        }
+        .action-icons-container {
+          display: flex;
+          justify-content: space-around;
+          gap: 1rem;
+          i {
+            cursor: pointer;
+          }
+          .arrows-container,
+          .arrows-container-large {
+            margin: 0 auto;
+            width: 1.3rem;
+            height: 1.3rem;
+            border: solid 1px $MAIN_COLOR;
+            border-radius: 50%;
+            @include ROW_JUSTIFY_CENTER;
+            cursor: pointer;
+          }
+          .arrows-container-large {
+            display: none;
+          }
+        }
+
+        .more-information {
+          padding: 1rem;
+          width: 90%;
+          margin: 0 auto;
+          .more-information-body {
+            background: url(./assets/lined-page.jpg) left / cover no-repeat;
+            padding: 1rem;
+            margin: 0 auto;
+            min-height: 390px;
+            p {
+              display: flex;
+              justify-content: space-between;
+              margin-top: 1rem;
+              width: 80%;
+              margin-left: auto;
+              font-size: 0.8rem;
+            }
+            .title {
+              width: 70%;
+              justify-content: center;
+              margin: 0 auto;
+              text-align: center;
+            }
+            .description {
+              flex-direction: column;
+              align-items: flex-start;
+              text-align: left;
+            }
+          }
+          .action-buttons-container {
+            max-width: 350px;
+            display: flex;
+            justify-content: space-around;
+            margin: 0 auto;
+            margin-top: 1rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $SMALL_SCREEN) {
+  .tasks-container {
+    .tasks {
+      .task {
+        .task-body {
+          .task-header {
+            width: 80%;
+            margin: 0 auto;
+          }
+          .more-information {
+            width: 65%;
+            margin: 0 auto;
+            .more-information-body {
+              width: 350px;
+              p {
+                font-size: 1rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $MEDIUM_SCREEN) {
+  .tasks-container {
+    .tasks {
+      .task {
+        .task-body {
+          .task-header {
+            width: 60%;
+          }
+          .more-information {
+            width: 50%;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $LARGE_SCREEN) {
+  .tasks-container {
+    .tasks {
+      .filter-search-container {
+        width: fit-content;
+        .form-container {
+          form {
+            .error-message {
+              text-align: left;
+            }
+          }
+        }
+      }
+      .task {
+        width: 100%;
+        .task-body {
+          display: flex;
+          align-items: flex-start;
+          .task-header {
+            margin-left: 0;
+            width: 50%;
+            .arrows-container {
+              display: none;
+            }
+            .arrows-container-large {
+              display: flex;
+            }
+          }
+          .more-information {
+            width: 40%;
+            align-items: center;
+            .more-information-body {
+              margin: 0 auto;
+            }
+          }
+        }
+        .arrows-container {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $EXTRA_LARGE_SCREEN) {
+  .tasks-container {
+    .tasks {
+      .task {
+        .task-body {
+          .task-header {
+            width: 40%;
+          }
+        }
       }
     }
   }

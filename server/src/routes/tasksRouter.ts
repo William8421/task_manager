@@ -5,8 +5,9 @@ import {
   getAllTasks,
   updateTask,
   deleteTask,
-  getFilteredTasks,
   searchTasksByTitle,
+  filterByStatus,
+  filterByPriority,
 } from "../controllers/taskController";
 import { validateToken } from "../middleware/validateToken";
 
@@ -27,11 +28,18 @@ router.post("/create", validateToken, createTask);
 router.post("/alltasks", validateToken, getAllTasks);
 
 /**
- * @route Post /tasks/completed
- * @desc get a list of user filtered tasks
+ * @route Post /tasks/status/filter
+ * @desc get a list of tasks filtered by status
  * @access Private
  */
-router.post("/completed", validateToken, getFilteredTasks);
+router.post("/status/filter", validateToken, filterByStatus);
+
+/**
+ * @route Post /tasks/priority/filter
+ * @desc get a list of tasks filtered by priority
+ * @access Private
+ */
+router.post("/priority/filter", validateToken, filterByPriority);
 
 /**
  * @route Post /tasks/search

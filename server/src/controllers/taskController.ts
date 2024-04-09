@@ -4,7 +4,7 @@ import { sendErrorResponse, sendSuccessResponse } from "../helper/response";
 
 // Create a new task
 export const createTask = async (req: Request, res: Response) => {
-  const { user_id, title, description, due_date, status } = req.body;
+  const { user_id, title, description, due_date, status, priority } = req.body;
 
   try {
     // Check if the user exists
@@ -19,8 +19,8 @@ export const createTask = async (req: Request, res: Response) => {
 
     // Insert the new task
     const newTaskQuery = `
-      INSERT INTO tasks (title, description, due_date, user_id, status)
-      VALUES ($1, $2, $3, $4, $5)
+      INSERT INTO tasks (title, description, due_date, user_id, status, priority)
+      VALUES ($1, $2, $3, $4, $5, $6)
       RETURNING *
     `;
     const newTask = await pool.query(newTaskQuery, [
@@ -29,6 +29,7 @@ export const createTask = async (req: Request, res: Response) => {
       due_date,
       user_id,
       status,
+      priority,
     ]);
     const task = newTask.rows[0];
 
@@ -56,11 +57,29 @@ export const getAllTasks = async (req: Request, res: Response) => {
 };
 
 // Get filtered tasks
-export const getFilteredTasks = async (req: Request, res: Response) => {
+export const filterByStatus = async (req: Request, res: Response) => {
   const { user_id, filter } = req.body;
   try {
     const completedTasks = await pool.query(
       "SELECT * FROM tasks WHERE user_id = $1 AND status = $2",
+      [user_id, filter]
+    );
+    const filteredTasks = completedTasks.rows;
+
+    sendSuccessResponse(res, 200, filteredTasks);
+  } catch (err) {
+    console.error("Error fetching tasks:", err);
+    sendErrorResponse(res, 500, "Internal Server Error");
+  }
+};
+
+// Get filtered tasks
+export const filterByPriority = async (req: Request, res: Response) => {
+  const { user_id, filter } = req.body;
+
+  try {
+    const completedTasks = await pool.query(
+      "SELECT * FROM tasks WHERE user_id = $1 AND priority = $2",
       [user_id, filter]
     );
     const filteredTasks = completedTasks.rows;
@@ -102,7 +121,8 @@ export const searchTasksByTitle = async (req: Request, res: Response) => {
 
 // Update task
 export const updateTask = async (req: Request, res: Response) => {
-  const { task_id, title, description, due_date, status, user_id } = req.body;
+  const { task_id, title, description, due_date, status, priority, user_id } =
+    req.body;
 
   try {
     const taskQuery = await pool.query(
@@ -125,6 +145,7 @@ export const updateTask = async (req: Request, res: Response) => {
         description = COALESCE($3, description),
         due_date = COALESCE($4, due_date),
         status = COALESCE($5, status),
+        priority = COALESCE($6, priority),
         updated_at = CURRENT_TIMESTAMP
       WHERE task_id = $1
       RETURNING *
@@ -136,6 +157,7 @@ export const updateTask = async (req: Request, res: Response) => {
       description || task.description,
       due_date || task.due_date,
       status || task.status,
+      priority || task.priority,
     ]);
     const updatedTask = result.rows[0];
     sendSuccessResponse(res, 200, {

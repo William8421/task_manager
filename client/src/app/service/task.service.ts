@@ -63,7 +63,7 @@ export class TaskService {
   }
 
   // get logged in user filtered tasks
-  getFilteredTasks(status: string): Observable<TaskProps[]> {
+  getFilteredTasksByStatus(status: string): Observable<TaskProps[]> {
     const userData = JSON.parse(localStorage.getItem('user') || '{}');
     if (this.isTokenExpired(userData.token)) {
       this.logOut();
@@ -76,8 +76,28 @@ export class TaskService {
     });
 
     return this.http.post<TaskProps[]>(
-      `${this.baseURL}/tasks/completed`,
+      `${this.baseURL}/tasks/status/filter`,
       { user_id: userData.id, filter: status },
+      { headers }
+    );
+  }
+
+  // get logged in user filtered tasks
+  getFilteredTasksByPriority(priority: string): Observable<TaskProps[]> {
+    const userData = JSON.parse(localStorage.getItem('user') || '{}');
+    if (this.isTokenExpired(userData.token)) {
+      this.logOut();
+      return new Observable<TaskProps[]>();
+    }
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${userData.token}`,
+    });
+
+    return this.http.post<TaskProps[]>(
+      `${this.baseURL}/tasks/priority/filter`,
+      { user_id: userData.id, filter: priority },
       { headers }
     );
   }

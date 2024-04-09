@@ -1,6 +1,6 @@
 <div class="modal">
     <div class="modal-header">
-        <h2>Create new Task</h2>
+        <h2>Add Task</h2>
     </div>
     <div class="modal-content">
         <form #newTaskForm="ngForm" (submit)="createTask(newTaskForm)">
@@ -23,6 +23,15 @@
                     <option value="In progress">In progress</option>
                     <option value="Cancelled">Cancelled</option>
                     <option value="Completed">Completed</option>
+                </select>
+            </div>
+            <div class="input-container">
+                <label for="priority">Select priority</label>
+                <select name="priority" autocomplete="new-priority" ngModel>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                    <option value="Urgent">Urgent</option>
                 </select>
             </div>
             <div class="modal-footer">

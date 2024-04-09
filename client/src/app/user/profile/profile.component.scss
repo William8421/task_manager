@@ -15,8 +15,11 @@
         img {
           margin: 0 auto;
           display: block;
-          width: 90%;
+          width: 200px;
+          height: 200px;
           border-radius: 16px;
+          object-fit: cover;
+          object-position: top;
         }
       }
       .user-information {

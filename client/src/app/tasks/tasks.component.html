@@ -5,37 +5,56 @@
     <div class="tasks" *ngIf="isLoggedIn; else loginMessage">
         <button class="main-button" (click)="toggleCreateModal()">New task</button>
         <div class="filter-search-container">
-            <span class="filter-search-button" (click)="toggleSearchMode()">{{searchMode? 'Filter tasks' :
-                'Search tasks'}}</span>
+            <span class="filter-search-button" (click)="toggleSearchMode()">{{ searchMode ? 'Filter tasks' :
+                'Search tasks' }}</span>
             <div class="form-container" *ngIf="!searchMode">
-                <form #selectFilter="ngForm" (change)="filterTasksByStatus(selectFilter)">
-                    <label for="statusFilter">Filter tasks:</label>
-                    <select id="statusFilter" name="status" ngModel>
-                        <option value="all">All</option>
-                        <option value="Completed">Completed</option>
-                        <option value="Pending">Pending</option>
-                        <option value="In progress">In Progress</option>
-                        <option value="Cancelled">Cancelled</option>
-                    </select>
+                <form #filterForm="ngForm">
+                    <div>
+                        <input type="radio" name="filter" value="status" ngModel (ngModelChange)="filter = 'status'">
+                        Status
+                        <input type="radio" name="filter" value="priority" ngModel
+                            (ngModelChange)="filter = 'priority'">
+                        Priority
+                    </div>
+                    <div>
+                        <div *ngIf="filter === 'status'">
+                            <select name="status" ngModel (change)="filterTasks(filterForm)">
+                                <option value="all">All</option>
+                                <option value="Completed">Completed</option>
+                                <option value="Pending">Pending</option>
+                                <option value="In progress">In Progress</option>
+                                <option value="Cancelled">Cancelled</option>
+                            </select>
+                        </div>
+                        <div *ngIf="filter === 'priority'">
+                            <select name="priority" ngModel (change)="filterTasks(filterForm)">
+                                <option value="all">All</option>
+                                <option value="Low">Low</option>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
+                                <option value="Urgent">Urgent</option>
+                            </select>
+                        </div>
+                    </div>
                 </form>
             </div>
-            <div class="form-container" *ngIf="searchMode">
-                <form #searchQuery="ngForm" (submit)="searchTasksByTitle(searchQuery)">
-                    <div>
-                        <input type="search" id="searchTasks" name="title" ngModel>
-                        <i class="fa-solid fa-magnifying-glass" (click)="searchTasksByTitle(searchQuery)"></i>
+            <div class=" form-container" *ngIf="searchMode">
+                <form #searchForm="ngForm" (submit)="searchTasksByTitle(searchForm)">
+                    <div class="search-input">
+                        <input type="search" name="title" ngModel>
+                        <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </div>
-                    <p class="error-message" *ngIf="errorMessage">{{errorMessage}}</p>
+                    <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
                 </form>
             </div>
         </div>
         <div class="task" *ngFor="let task of tasks">
-            <div class="task-body" [class.canceled]="isTaskCancelled(task)">
-                <div class="task-header" [class.completed]="isTaskCompleted(task)"
-                    [class.overdue]="isTaskOverdue(task)">
-                    <p class="title" (click)="showMoreDetails(task)">
+            <div class="task-body">
+                <div class="task-header">
+                    <p class="title" (click)="showMoreDetails(task)" [class]="isStatus(task)">
                         {{task.title}}
                     </p>
+                    <p class="priority" [class]="isPriority(task)" (click)="showMoreDetails(task)">{{task.priority}}</p>
                     <div class="action-icons-container">
                         <div class="arrows-container">
                             <i (click)="showMoreDetails(task)"
@@ -55,15 +74,16 @@
                         </p>
                         <p class="description"><strong>Description: </strong> <span>{{task.description}} </span></p>
                         <p><strong>Status: </strong> <span>{{task.status}} </span></p>
-                        <p [class.overdue]="isTaskOverdue(task)"><strong>Due Date: </strong> <span>{{task.due_date |
+                        <p><strong>Priority: </strong> <span>{{task.priority}} </span></p>
+                        <p><strong>Due Date: </strong> <span>{{task.due_date |
                                 date:
                                 'dd.MM.yyyy HH:mm'}}
                             </span></p>
-                        <p><strong>Created at: </strong> <span>{{task.created_at | date: 'dd.MM.yyyy HH:mm':'UTC+0400'}}
+                        <p><strong>Created at: </strong> <span>{{task.created_at | date: 'dd.MM.yyyy HH:mm'}}
                             </span>
                         </p>
                         <p *ngIf="task.updated_at"><strong>Updated at: </strong> <span>
-                                {{task.updated_at | date: 'dd.MM.yyyy HH:mm':'UTC+0400'}} </span> </p>
+                                {{task.updated_at | date: 'dd.MM.yyyy HH:mm'}} </span> </p>
                     </div>
                     <div class="action-buttons-container">
                         <button class="delete-button" (click)="toggleDeleteModal(task)">Delete</button>

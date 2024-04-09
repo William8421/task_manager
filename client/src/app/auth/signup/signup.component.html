@@ -38,7 +38,7 @@
             <i class="eye-icon" (click)="hideConfirm = !hideConfirm"
                 [class]="hideConfirm? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash' "></i>
         </div>
-        <div class="input-container">
+        <div class="input-container profile-picture-input-container">
             <label for="profile_picture">Profile picture</label>
             <div class="picture-button-container">
                 <input type="file" id="profile_picture" (change)="onFileSelected($event)" accept="image/*">
