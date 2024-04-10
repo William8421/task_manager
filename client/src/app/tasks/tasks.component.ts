@@ -14,7 +14,7 @@ export class TasksComponent {
   tasks: TaskProps[] = [];
   responseMessage = '';
   errorMessage: string | null = null;
-  searchMode = false;
+  filterSearchMode = '';
   filter = 'status';
 
   selectedTask: TaskProps | null = null;
@@ -97,10 +97,19 @@ export class TasksComponent {
     });
   }
 
+  toggleFilterMode() {
+    if (this.filterSearchMode !== 'filter') {
+      this.filterSearchMode = 'filter';
+    } else {
+      this.filterSearchMode = '';
+    }
+  }
+
   toggleSearchMode() {
-    this.searchMode = !this.searchMode;
-    if (!this.searchMode) {
-      this.getUserTasks();
+    if (this.filterSearchMode !== 'search') {
+      this.filterSearchMode = 'search';
+    } else {
+      this.filterSearchMode = '';
     }
   }
 
