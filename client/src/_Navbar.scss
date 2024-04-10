@@ -98,23 +98,6 @@
 
 .scroll-background {
   background-color: $SECONDARY_COLOR;
-  .app-name {
-    a {
-      h2 {
-        color: white;
-      }
-    }
-  }
-  .menu-off {
-    .routes-container {
-      a,
-      div {
-        button {
-          color: white;
-        }
-      }
-    }
-  }
 }
 
 @media screen and (min-width: $SMALL_SCREEN) {
@@ -169,6 +152,25 @@
         }
         .close-navbar {
           display: none;
+        }
+      }
+    }
+  }
+  .scroll-background {
+    .app-name {
+      a {
+        h2 {
+          color: white;
+        }
+      }
+    }
+    .menu-off {
+      .routes-container {
+        a,
+        div {
+          button {
+            color: white;
+          }
         }
       }
     }
