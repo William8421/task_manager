@@ -73,7 +73,7 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            width: 120px;
+            width: 40%;
             text-align: left;
           }
           .title::before {
@@ -234,7 +234,7 @@
           align-items: flex-start;
           .task-header {
             margin-left: 0;
-            width: 50%;
+            width: 60%;
             .arrows-container {
               display: none;
             }
@@ -264,7 +264,7 @@
       .task {
         .task-body {
           .task-header {
-            width: 40%;
+            width: 50%;
           }
         }
       }
