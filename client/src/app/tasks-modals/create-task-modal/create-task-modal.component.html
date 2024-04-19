@@ -18,7 +18,7 @@
             </div>
             <div class="input-container">
                 <label for="status">Select status</label>
-                <select name="status" autocomplete="new-status" ngModel>
+                <select name="status" autocomplete="new-status" [(ngModel)]="defaultStatus">
                     <option value="Pending">Pending</option>
                     <option value="In progress">In progress</option>
                     <option value="Cancelled">Cancelled</option>
@@ -27,7 +27,7 @@
             </div>
             <div class="input-container">
                 <label for="priority">Select priority</label>
-                <select name="priority" autocomplete="new-priority" ngModel>
+                <select name="priority" autocomplete="new-priority" [(ngModel)]="defaultPriority">
                     <option value="Low">Low</option>
                     <option value="Medium">Medium</option>
                     <option value="High">High</option>

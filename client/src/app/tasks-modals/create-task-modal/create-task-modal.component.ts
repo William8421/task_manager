@@ -24,6 +24,8 @@ export class CreateTaskModalComponent implements OnInit {
 
   requiredError = '';
   selectedTime: string = '';
+  defaultStatus: string = 'Pending';
+  defaultPriority: string = 'Medium';
 
   constructor(private taskService: TaskService) {}
   ngOnInit(): void {
@@ -40,9 +42,6 @@ export class CreateTaskModalComponent implements OnInit {
   // create a new task
   createTask(newTaskForm: NgForm) {
     if (newTaskForm.valid) {
-      if (!newTaskForm.value.status) {
-        newTaskForm.value.status = 'Pending';
-      }
       this.taskService.createTask(newTaskForm.value).subscribe({
         next: (item: TaskResponseProps) => {
           this.responseMessage.emit(item.message);
