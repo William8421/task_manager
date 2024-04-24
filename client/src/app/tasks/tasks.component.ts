@@ -15,7 +15,12 @@ export class TasksComponent implements OnInit {
   responseMessage = '';
   errorMessage: string | null = null;
   filterSearchMode = '';
-  filter = 'status';
+  statusFilter = false;
+  priorityFilter = false;
+  // filter = 'status';
+  defaultStatus = 'all';
+  defaultPriority = 'all';
+
   selectedTask: TaskProps | null = null;
   moreLessTask: TaskProps | null = null;
   showCreateModal = false;
@@ -58,10 +63,33 @@ export class TasksComponent implements OnInit {
   // Filter tasks based on form input
   filterTasks(form: NgForm) {
     const value = form.value;
-    if (value.filter === 'status' || this.filter === 'status') {
+    if (value.status !== 'all' && value.priority === 'all') {
       this.filterTasksByStatus(value.status);
-    } else if (value.filter === 'priority') {
+    } else if (value.priority !== 'all' && value.status === 'all') {
       this.filterTasksByPriority(value.priority);
+    } else if (value.status !== 'all' && value.priority !== 'all') {
+      this.filterByBothFilters(value.status, value.priority);
+    } else {
+      this.getUserTasks();
+    }
+  }
+
+  filterByBothFilters(status: string, priority: string) {
+    console.log('status', status, 'priority', priority);
+
+    if (status === 'all' && priority === 'all') {
+      this.getUserTasks();
+    } else {
+      this.taskService
+        .getFilteredTasksByStatusAndPriority(status, priority)
+        .subscribe({
+          next: (items: TaskProps[]) => {
+            this.tasks = items;
+          },
+          error: (err) => {
+            console.error(err);
+          },
+        });
     }
   }
 

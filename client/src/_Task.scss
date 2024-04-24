@@ -25,20 +25,17 @@
       .form-container {
         padding: 1rem;
         form {
-          @include COLUMN_ALIGN_CENTER;
+          @include ROW_JUSTIFY_CENTER;
           gap: 1rem;
-          input,
           select {
             border: none;
             border-radius: 6px;
-            padding: 0.5rem;
+            min-width: 100px;
+            padding: 0.1rem;
+            text-align: center;
           }
-          input,
           select:focus {
             outline: none;
-          }
-          select {
-            min-width: 150px;
           }
           .search-input {
             @include ROW_JUSTIFY_BETWEEN;
@@ -218,9 +215,10 @@
   .tasks-container {
     .tasks {
       .filter-search-container {
-        width: fit-content;
+        text-align: left;
         .form-container {
           form {
+            justify-content: flex-start;
             .error-message {
               text-align: left;
             }
@@ -240,6 +238,10 @@
             }
             .arrows-container-large {
               display: flex;
+            }
+            .title,
+            .priority {
+              cursor: pointer;
             }
           }
           .more-information {

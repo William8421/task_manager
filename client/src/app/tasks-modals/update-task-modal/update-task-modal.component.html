@@ -30,7 +30,7 @@
             </div>
             <div class="input-container">
                 <label for="priority">Select priority</label>
-                <select name="priority" autocomplete="new-priority" ngModel>
+                <select name="priority" autocomplete="new-priority" [(ngModel)]="task.priority">
                     <option value="Low">Low</option>
                     <option value="Medium">Medium</option>
                     <option value="High">High</option>

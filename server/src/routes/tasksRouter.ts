@@ -8,6 +8,7 @@ import {
   searchTasksByTitle,
   filterByStatus,
   filterByPriority,
+  filterByStatusAndPriority,
 } from "../controllers/taskController";
 import { validateToken } from "../middleware/validateToken";
 
@@ -40,6 +41,17 @@ router.post("/status/filter", validateToken, filterByStatus);
  * @access Private
  */
 router.post("/priority/filter", validateToken, filterByPriority);
+
+/**
+ * @route Post /tasks/status and priority/filter
+ * @desc get a list of tasks filtered by status and priority
+ * @access Private
+ */
+router.post(
+  "/status&priority/filter",
+  validateToken,
+  filterByStatusAndPriority
+);
 
 /**
  * @route Post /tasks/search

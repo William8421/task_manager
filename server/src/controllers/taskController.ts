@@ -56,35 +56,55 @@ export const getAllTasks = async (req: Request, res: Response) => {
   }
 };
 
-// Get filtered tasks
+// Get filtered tasks by status
 export const filterByStatus = async (req: Request, res: Response) => {
   const { user_id, filter } = req.body;
   try {
-    const completedTasks = await pool.query(
+    const filteredTasks = await pool.query(
       "SELECT * FROM tasks WHERE user_id = $1 AND status = $2",
       [user_id, filter]
     );
-    const filteredTasks = completedTasks.rows;
+    const tasks = filteredTasks.rows;
 
-    sendSuccessResponse(res, 200, filteredTasks);
+    sendSuccessResponse(res, 200, tasks);
   } catch (err) {
     console.error("Error fetching tasks:", err);
     sendErrorResponse(res, 500, "Internal Server Error");
   }
 };
 
-// Get filtered tasks
+// Get filtered tasks by priority
 export const filterByPriority = async (req: Request, res: Response) => {
   const { user_id, filter } = req.body;
 
   try {
-    const completedTasks = await pool.query(
+    const filteredTasks = await pool.query(
       "SELECT * FROM tasks WHERE user_id = $1 AND priority = $2",
       [user_id, filter]
     );
-    const filteredTasks = completedTasks.rows;
+    const tasks = filteredTasks.rows;
 
-    sendSuccessResponse(res, 200, filteredTasks);
+    sendSuccessResponse(res, 200, tasks);
+  } catch (err) {
+    console.error("Error fetching tasks:", err);
+    sendErrorResponse(res, 500, "Internal Server Error");
+  }
+};
+
+// Get filtered tasks by both status and priority
+export const filterByStatusAndPriority = async (
+  req: Request,
+  res: Response
+) => {
+  const { user_id, statusFilter, priorityFilter } = req.body;
+
+  try {
+    const filteredTasks = await pool.query(
+      "SELECT * FROM tasks WHERE user_id = $1 AND status = $2 AND priority = $3",
+      [user_id, statusFilter, priorityFilter]
+    );
+    const tasks = filteredTasks.rows;
+    sendSuccessResponse(res, 200, tasks);
   } catch (err) {
     console.error("Error fetching tasks:", err);
     sendErrorResponse(res, 500, "Internal Server Error");

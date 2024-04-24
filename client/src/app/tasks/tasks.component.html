@@ -3,38 +3,37 @@
     <h1>My tasks</h1>
     <p class="response-message" *ngIf="responseMessage">{{ responseMessage }}</p>
     <div class="tasks" *ngIf="isLoggedIn; else loginMessage">
-        <button class="main-button" (click)="toggleCreateModal()">New task</button>
+        <button class="main-button" title="add new task" (click)="toggleCreateModal()">New task</button>
         <div class="filter-search-container">
-            <button class="filter-search-button" (click)="toggleFilterMode()">Filter tasks</button>
-            <button class="filter-search-button" (click)="toggleSearchMode()">Search tasks</button>
+            <button class="filter-search-button" title="filter tasks by status or priority"
+                (click)="toggleFilterMode()">Filter tasks</button>
+            <button class="filter-search-button" title="search tasks by title" (click)="toggleSearchMode()">Search
+                tasks</button>
             <div class="form-container" *ngIf="filterSearchMode === 'filter'">
                 <form #filterForm="ngForm">
                     <div>
-                        <input type="radio" name="filter" value="status" ngModel (ngModelChange)="filter = 'status'">
-                        Status
-                        <input type="radio" name="filter" value="priority" ngModel
-                            (ngModelChange)="filter = 'priority'">
-                        Priority
-                    </div>
-                    <div>
-                        <div *ngIf="filter === 'status'">
-                            <select name="status" ngModel (change)="filterTasks(filterForm)">
+                        <label>
+                            Status
+                            <select name="status" [(ngModel)]="defaultStatus" (change)="filterTasks(filterForm)">
                                 <option value="all">All</option>
                                 <option value="Pending">Pending</option>
                                 <option value="In progress">In Progress</option>
                                 <option value="Completed">Completed</option>
                                 <option value="Cancelled">Cancelled</option>
                             </select>
-                        </div>
-                        <div *ngIf="filter === 'priority'">
-                            <select name="priority" ngModel (change)="filterTasks(filterForm)">
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            Priority
+                            <select name="priority" [(ngModel)]="defaultPriority" (change)="filterTasks(filterForm)">
                                 <option value="all">All</option>
                                 <option value="Low">Low</option>
                                 <option value="Medium">Medium</option>
                                 <option value="High">High</option>
                                 <option value="Urgent">Urgent</option>
                             </select>
-                        </div>
+                        </label>
                     </div>
                 </form>
             </div>
@@ -51,21 +50,32 @@
         <div class="task" *ngFor="let task of tasks">
             <div class="task-body">
                 <div class="task-header">
-                    <p class="title" (click)="showMoreDetails(task)" [class]="isStatus(task)">
+                    <p class="title" [title]="task.title" (click)="showMoreDetails(task)" [class]="isStatus(task)">
                         {{task.title}}
                     </p>
-                    <p class="priority" [class]="isPriority(task)" (click)="showMoreDetails(task)">{{task.priority}}</p>
                     <div class="action-icons-container">
-                        <div class="arrows-container">
+                        <!-- <div class="arrows-container">
                             <i (click)="showMoreDetails(task)"
                                 [class]="moreLessTask === task? 'fa-solid fa-angles-up' : 'fa-solid fa-angles-down'"></i>
                         </div>
                         <div class="arrows-container-large">
                             <i (click)="showMoreDetails(task)"
                                 [class]="moreLessTask === task? 'fa-solid fa-angles-left' : 'fa-solid fa-angles-right'"></i>
+                        </div> -->
+                    </div>
+                    <p class="priority" [class]="isPriority(task)" title="priority" (click)="showMoreDetails(task)">
+                        {{task.priority}}</p>
+                    <div class="action-icons-container">
+                        <!-- <div class="arrows-container">
+                            <i (click)="showMoreDetails(task)"
+                                [class]="moreLessTask === task? 'fa-solid fa-angles-up' : 'fa-solid fa-angles-down'"></i>
                         </div>
-                        <i class="fa-solid fa-trash-can" (click)="toggleDeleteModal(task)"></i>
-                        <i class="fa-solid fa-pen" (click)="toggleUpdateModal(task)"></i>
+                        <div class="arrows-container-large">
+                            <i (click)="showMoreDetails(task)"
+                                [class]="moreLessTask === task? 'fa-solid fa-angles-left' : 'fa-solid fa-angles-right'"></i>
+                        </div> -->
+                        <i class="fa-solid fa-trash-can" title="delete task" (click)="toggleDeleteModal(task)"></i>
+                        <i class="fa-solid fa-pen" title="update task" (click)="toggleUpdateModal(task)"></i>
                     </div>
                 </div>
                 <div class="more-information" *ngIf=" moreLessTask === task">

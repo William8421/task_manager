@@ -62,7 +62,7 @@ export class TaskService {
     );
   }
 
-  // get logged in user filtered tasks
+  // get logged in user filtered tasks by status
   getFilteredTasksByStatus(status: string): Observable<TaskProps[]> {
     const userData = JSON.parse(localStorage.getItem('user') || '{}');
     if (this.isTokenExpired(userData.token)) {
@@ -82,7 +82,7 @@ export class TaskService {
     );
   }
 
-  // get logged in user filtered tasks
+  // get logged in user filtered tasks by priority
   getFilteredTasksByPriority(priority: string): Observable<TaskProps[]> {
     const userData = JSON.parse(localStorage.getItem('user') || '{}');
     if (this.isTokenExpired(userData.token)) {
@@ -98,6 +98,31 @@ export class TaskService {
     return this.http.post<TaskProps[]>(
       `${this.baseURL}/tasks/priority/filter`,
       { user_id: userData.id, filter: priority },
+      { headers }
+    );
+  }
+
+  // get logged in user filtered tasks by status and priority
+  getFilteredTasksByStatusAndPriority(
+    statusFilter: string,
+    priorityFilter: string
+  ) {
+    console.log('service', statusFilter, priorityFilter);
+
+    const userData = JSON.parse(localStorage.getItem('user') || '{}');
+    if (this.isTokenExpired(userData.token)) {
+      this.logOut();
+      return new Observable<TaskProps[]>();
+    }
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${userData.token}`,
+    });
+
+    return this.http.post<TaskProps[]>(
+      `${this.baseURL}/tasks/status&priority/filter`,
+      { user_id: userData.id, statusFilter, priorityFilter },
       { headers }
     );
   }
