@@ -54,14 +54,14 @@
                         {{task.title}}
                     </p>
                     <div class="action-icons-container">
-                        <!-- <div class="arrows-container">
+                        <div class="arrows-container">
                             <i (click)="showMoreDetails(task)"
                                 [class]="moreLessTask === task? 'fa-solid fa-angles-up' : 'fa-solid fa-angles-down'"></i>
                         </div>
                         <div class="arrows-container-large">
                             <i (click)="showMoreDetails(task)"
                                 [class]="moreLessTask === task? 'fa-solid fa-angles-left' : 'fa-solid fa-angles-right'"></i>
-                        </div> -->
+                        </div>
                     </div>
                     <p class="priority" [class]="isPriority(task)" title="priority" (click)="showMoreDetails(task)">
                         {{task.priority}}</p>
