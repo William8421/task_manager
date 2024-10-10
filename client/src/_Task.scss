@@ -55,6 +55,9 @@
             }
           }
         }
+        .search-form {
+          @include COLUMN_ALIGN_CENTER;
+        }
       }
     }
     .task {

@@ -1,19 +1,29 @@
 <div class="login-container">
-    <h1>Login</h1>
+    <h1>{{ 'LOGIN' | translate }}</h1>
     <form #loginForm="ngForm" (submit)="login(loginForm)">
+        <!-- Email -->
         <div class="input-container">
             <label for="email">Email <span class="required-marker">*</span></label>
-            <input #emailInput type="email" name="email" autocomplete="email" required ngModel>
+            <input #emailInput type="email" name="email" autocomplete="email" required ngModel />
         </div>
+
+        <!-- Password -->
         <div class="input-container">
-            <label for="password">Password <span class="required-marker">*</span></label>
-            <input [type]="hide? 'text': 'password'" name="password" autocomplete="new-password" required ngModel>
-            <i class="eye-icon" (click)="hide = !hide" [class]="hide? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash' "></i>
+            <label for="password">{{ 'PASSWORD' | translate }} <span class="required-marker">*</span></label>
+            <input [type]="hide ? 'text' : 'password'" name="password" autocomplete="new-password" required ngModel />
+            <i class="eye-icon" (click)="hide = !hide" [class]="hide ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash'"></i>
         </div>
-        <button class="main-button">Log in</button>
-        <div>
-            <div>No account yet? <span class="redirect" (click)=" RedirectRegister()">Register</span></div>
-        </div>
+
+        <!-- Submit Button -->
+        <button class="main-button">{{ 'LOGIN' | translate }}</button>
+
+        <!-- Redirect to Signup -->
+        <div>{{ 'NO_ACCOUNT' | translate }} <span class="redirect" (click)="RedirectRegister()">{{ 'REGISTER' |
+                translate }}</span></div>
     </form>
-    <div class="error-message">{{errorMessage}}</div>
+
+    <!-- Error Messages -->
+    <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage | translate }}
+    </div>
 </div>

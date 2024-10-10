@@ -63,6 +63,20 @@
       gap: 1rem;
       padding: 5rem 1rem;
       position: relative;
+      .language-switcher {
+        @include ROW_JUSTIFY_BETWEEN;
+        gap: 0.5rem;
+        select {
+          border: 1px solid #ccc;
+          border-radius: 6px;
+          padding: 2px;
+        }
+        .flag-icon {
+          width: 30px;
+          border: none;
+          border-radius: 6px;
+        }
+      }
       .auth-container {
         display: flex;
         flex-direction: column;
@@ -142,6 +156,23 @@
           font-family: "Libre Baskerville", serif;
           cursor: pointer;
         }
+
+        .language-switcher {
+          select {
+            font-size: 0.7rem;
+            height: 17px;
+            align-self: flex-end;
+          }
+          .flag-icon {
+            width: 25px;
+            height: 15px;
+            align-self: flex-end;
+          }
+        }
+
+        button:hover {
+          color: red;
+        }
         .active {
           button {
             text-decoration: underline;
@@ -189,6 +220,27 @@
     }
     .menu-off {
       width: 60%;
+      .routes-container {
+        button {
+          font-size: 0.9rem;
+        }
+        .language-switcher {
+          select {
+            font-size: 0.8rem;
+            height: 20px;
+          }
+          .flag-icon {
+            width: 30px;
+            height: 20px;
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (min-width: $LARGE_SCREEN) {
+  .navbar-container {
+    .menu-off {
       .routes-container {
         button {
           font-size: 1rem;

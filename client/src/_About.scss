@@ -11,6 +11,7 @@
     padding: 1rem;
     .about-sub-container {
       @include COLUMN_ALIGN_CENTER;
+      gap: 2rem;
       h2 {
         padding: 1rem;
       }
@@ -38,7 +39,7 @@
           gap: 1rem;
           .tech {
             padding: 0 0.5rem;
-            border-radius: 0 26px 0 26px;
+            border-radius: 6px;
             p {
               color: black;
               -webkit-text-stroke: 0.5px $MAIN_COLOR;
@@ -66,7 +67,7 @@
           .aws-background {
             img {
               width: 90%;
-              border-radius: 0 26px 0 26px;
+              border-radius: 6px;
             }
           }
         }
@@ -74,7 +75,7 @@
       .footer {
         background-color: $BG_COLOR;
         color: $MAIN_COLOR;
-        border-radius: 0 26px 0 26px;
+        border-radius: 6px;
         width: 90%;
       }
     }
@@ -100,6 +101,10 @@
                 width: 200px;
                 object-fit: cover;
                 object-position: top;
+                border-radius: 30px;
+                -webkit-box-shadow: -5px 5px 15px 0px rgba(0, 0, 0, 1);
+                -moz-box-shadow: -5px 5px 15px 0px rgba(0, 0, 0, 1);
+                box-shadow: -5px 5px 15px 0px rgba(0, 0, 0, 1);
               }
             }
             .features {
@@ -114,14 +119,10 @@
           }
         }
         .technologies {
+          margin-top: 2rem;
           .techs-container {
-            align-items: flex-start;
             .tech {
               width: 70%;
-            }
-            .postgres,
-            .docker {
-              align-self: flex-end;
             }
           }
         }
@@ -195,7 +196,7 @@
             justify-content: space-around;
             .tech {
               width: 45%;
-              min-height: 120px;
+              min-height: 200px;
             }
           }
         }
@@ -230,10 +231,10 @@
           }
         }
         .technologies {
-          width: 70%;
+          width: 80%;
           .techs-container {
             .tech {
-              min-height: 175px;
+              min-height: 200px;
             }
           }
         }

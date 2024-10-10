@@ -1,6 +1,6 @@
 <div class="profile-container">
     <div class="backdrop" *ngIf="showEditProfileModal || showChangePasswordModal" (click)="closeBackdrop()"></div>
-    <h1>My profile</h1>
+    <h1>{{'MY_PROFILE' | translate}}</h1>
     <div class="response-message" *ngIf="profileResponse">
         {{profileResponse}}</div>
     <div class="user-container" *ngIf="user; else profileNotAvailable ">
@@ -15,16 +15,17 @@
 
             </div>
             <div class="user-information">
-                <p><strong>Username: </strong> <span>{{ user.username }}</span></p>
-                <p><strong>First Name: </strong> <span>{{ user.first_name }}</span></p>
-                <p><strong>Last Name: </strong> <span>{{ user.last_name }}</span></p>
+                <p><strong>{{'USERNAME' | translate}}: </strong> <span>{{ user.username }}</span></p>
+                <p><strong>{{'FIRST_NAME' | translate}}: </strong> <span>{{ user.first_name }}</span></p>
+                <p><strong>{{'LAST_NAME' | translate}}: </strong> <span>{{ user.last_name }}</span></p>
                 <p><strong>Email: </strong> <span>{{ user.email }}</span></p>
                 <p>
-                    <span class="change-password-button" (click)="openChangePasswordModal(user)">Change Password</span>
+                    <span class="change-password-button" (click)="openChangePasswordModal(user)">{{'CHANGE_PASSWORD' |
+                        translate}}</span>
                 </p>
             </div>
         </div>
-        <button class="main-button" (click)="openEditProfileModal(user)">Edit profile</button>
+        <button class="main-button" (click)="openEditProfileModal(user)">{{'EDIT_PROFILE' | translate}}</button>
     </div>
     <ng-template #profileNotAvailable>
         <p>Please <span class="redirect" (click)="redirectToLogin()">Login</span> to access

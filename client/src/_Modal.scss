@@ -29,6 +29,7 @@
         margin-bottom: 1rem;
         border: solid 1px black;
         border-radius: 16px;
+        width: 80%;
         span {
           color: red;
           text-decoration: underline;
@@ -87,7 +88,6 @@
         display: flex;
         justify-content: space-around;
         gap: 1rem;
-        width: 80%;
         margin-top: 1rem;
       }
     }
@@ -102,4 +102,11 @@
   background-color: black;
   opacity: 0.5;
   z-index: 0;
+}
+
+@media screen and (max-height: 550px) {
+  .modal {
+    position: absolute;
+    top: 100%;
+  }
 }

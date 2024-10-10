@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { UserService } from '../../service/user.service';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/service/user.service';
 import { UserResponseProps } from 'src/types/userTypes';
 
 @Component({
@@ -12,6 +12,7 @@ import { UserResponseProps } from 'src/types/userTypes';
 export class LoginComponent implements OnInit {
   isLoggedIn = false;
   hide = false;
+  errorMessage = '';
   @ViewChild('emailInput') emailInput!: ElementRef;
 
   constructor(private userService: UserService, private router: Router) {
@@ -26,7 +27,7 @@ export class LoginComponent implements OnInit {
     if (this.isLoggedIn) {
       this.router.navigate(['']);
     }
-    // focus email input on in it
+    // focus email input on init
     setTimeout(() => {
       if (this.emailInput) {
         this.emailInput.nativeElement.focus();
@@ -34,41 +35,43 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  errorMessage = '';
-
   login(loginForm: NgForm) {
     if (loginForm.valid) {
-      // Check if login form is valid
       this.userService.signIn(loginForm.value).subscribe({
         next: (item: UserResponseProps) => {
           const { user, token } = item;
-          // Create user object
           const userStorage = {
             username: user.username,
             token: token,
             id: user.user_id,
           };
-          // Store user object in local storage
           localStorage.setItem('user', JSON.stringify(userStorage));
-          // Navigate to tasks page
           this.router.navigate(['tasks']);
         },
         error: (err) => {
           console.error(err);
-          // Handle server errors
-          this.errorMessage = err.error.errors
-            ? err.error.errors[0].msg
-            : err.error;
+          this.handleLoginError(err);
         },
       });
     } else {
-      // login form error
-      this.errorMessage = 'Email and Password are required to log in';
+      this.errorMessage = 'REQUIRED_FIELDS';
+    }
+  }
+
+  private handleLoginError(err: any) {
+    if (err.error.errors) {
+      const errorMsg = err.error.errors[0].msg;
+      if (errorMsg.includes('email')) {
+        this.errorMessage = 'EMAIL_VALID_ERROR';
+      } else {
+        this.errorMessage = errorMsg;
+      }
+    } else {
+      this.errorMessage = 'EMAIL_OR_PASSWORD_ERROR';
     }
   }
 
   RedirectRegister() {
-    // if user not registered Navigate to register page
     this.router.navigate(['signup']);
   }
 }

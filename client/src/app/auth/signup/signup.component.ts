@@ -40,7 +40,7 @@ export class SignupComponent implements OnInit {
     if (this.isLoggedIn) {
       this.router.navigate(['']);
     }
-    // focus username input on in it
+    // focus username input on init
     setTimeout(() => {
       if (this.usernameInput) {
         this.usernameInput.nativeElement.focus();
@@ -63,7 +63,8 @@ export class SignupComponent implements OnInit {
       this.imageName = inputElement.files[0].name;
     }
   }
-  //  Upload selected image to Cloudinary
+
+  // Upload selected image to Cloudinary
   uploadImage() {
     if (this.selectedFile) {
       // Prepare form data for image upload
@@ -86,52 +87,56 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  register(sigUpForm: NgForm) {
-    if (sigUpForm.valid) {
-      // Check if signup form is valid
-      const password = sigUpForm.value.password;
-      const confirmPassword = sigUpForm.value.confirmPassword;
+  register(signUpForm: NgForm) {
+    if (signUpForm.valid) {
+      const password = signUpForm.value.password;
+      const confirmPassword = signUpForm.value.confirmPassword;
       if (password !== confirmPassword) {
-        // Check if passwords match
-        this.errorMessage = 'Password and confirm password do not match.';
+        this.errorMessage = 'PASSWORDS_DO_NOT_MATCH';
         return;
       }
 
       // Add selected image to signup data
-      sigUpForm.value.profile_picture = this.selectedImage;
-      // Clear selected file
+      signUpForm.value.profile_picture = this.selectedImage;
       this.selectedFile = null;
 
-      this.userService.register(sigUpForm.value).subscribe({
+      this.userService.register(signUpForm.value).subscribe({
         next: (item: UserResponseProps) => {
           const { token, user } = item;
-          // Create user object
           const userStorage = {
             token: token,
             id: user.user_id,
             username: user.username,
           };
-          // Store user object in local storage
           localStorage.setItem('user', JSON.stringify(userStorage));
-          // Navigate to tasks page
           this.router.navigate(['tasks']);
         },
         error: (err) => {
           console.error(err);
-          // Handle server errors
-          this.errorMessage = err.error.errors
-            ? err.error.errors[0].msg
-            : err.error;
+          this.handleSignupError(err);
         },
       });
     } else {
-      // signup form errors
-      this.errorMessage = 'Please fill in all required fields marked with *!';
+      this.errorMessage = 'REQUIRED_FIELDS';
+    }
+  }
+
+  private handleSignupError(err: any) {
+    if (err.error.errors) {
+      const errorMsg = err.error.errors[0].msg;
+      if (errorMsg.includes('Username')) {
+        this.errorMessage = 'USERNAME_EXISTS';
+      } else if (errorMsg.includes('Email')) {
+        this.errorMessage = 'EMAIL_EXISTS';
+      } else {
+        this.errorMessage = errorMsg;
+      }
+    } else {
+      this.errorMessage = err.error;
     }
   }
 
   RedirectLogin() {
-    // Navigate to login page
     this.router.navigate(['login']);
   }
 }

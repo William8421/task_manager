@@ -1,49 +1,51 @@
 <div class="tasks-container">
     <div class="backdrop" *ngIf="showCreateModal || showUpdateModal || showDeleteModal" (click)="closeBackdrop()"></div>
-    <h1>My tasks</h1>
+    <h1>{{'TASKS_TITLE' | translate}}</h1>
     <p class="response-message" *ngIf="responseMessage">{{ responseMessage }}</p>
     <div class="tasks" *ngIf="isLoggedIn; else loginMessage">
-        <button class="main-button" title="add new task" (click)="toggleCreateModal()">New task</button>
+        <button class="main-button" title="add new task" (click)="toggleCreateModal()">{{'NEW_TASK' |
+            translate}}</button>
         <div class="filter-search-container">
             <button class="filter-search-button" title="filter tasks by status or priority"
-                (click)="toggleFilterMode()">Filter tasks</button>
-            <button class="filter-search-button" title="search tasks by title" (click)="toggleSearchMode()">Search
-                tasks</button>
+                (click)="toggleFilterMode()">{{'FILTER_TASKS' | translate}}</button>
+            <button class="filter-search-button" title="search tasks by title"
+                (click)="toggleSearchMode()">{{'SEARCH_TASKS' | translate}}</button>
             <div class="form-container" *ngIf="filterSearchMode === 'filter'">
                 <form #filterForm="ngForm">
                     <div>
                         <label>
-                            Status
+                            {{'STATUS' | translate}}
                             <select name="status" [(ngModel)]="defaultStatus" (change)="filterTasks(filterForm)">
-                                <option value="all">All</option>
-                                <option value="Pending">Pending</option>
-                                <option value="In progress">In Progress</option>
-                                <option value="Completed">Completed</option>
-                                <option value="Cancelled">Cancelled</option>
+                                <option value="all">{{'ALL' | translate}}</option>
+                                <option value="Pending">{{'PENDING' | translate}}</option>
+                                <option value="In progress">{{'IN PROGRESS' | translate}}</option>
+                                <option value="Completed">{{'COMPLETED' | translate}}</option>
+                                <option value="Cancelled">{{'CANCELLED' | translate}}</option>
                             </select>
                         </label>
                     </div>
                     <div>
                         <label>
-                            Priority
+                            {{'PRIORITY' | translate}}
                             <select name="priority" [(ngModel)]="defaultPriority" (change)="filterTasks(filterForm)">
-                                <option value="all">All</option>
-                                <option value="Low">Low</option>
-                                <option value="Medium">Medium</option>
-                                <option value="High">High</option>
-                                <option value="Urgent">Urgent</option>
+                                <option value="all">{{'ALL' | translate}}</option>
+                                <option value="Low">{{'LOW' | translate}}</option>
+                                <option value="Medium">{{'MEDIUM' | translate}}</option>
+                                <option value="High">{{'HIGH' | translate}}</option>
+                                <option value="Urgent">{{'URGENT' | translate}}</option>
                             </select>
                         </label>
                     </div>
                 </form>
             </div>
-            <div class=" form-container" *ngIf="filterSearchMode === 'search'">
-                <form #searchForm="ngForm" (submit)="searchTasksByTitle(searchForm)">
+            <div class="form-container" *ngIf="filterSearchMode === 'search'">
+                <form class="search-form" #searchForm="ngForm" (submit)="searchTasksByTitle(searchForm)">
                     <div class="search-input">
                         <input type="search" name="title" ngModel>
                         <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </div>
-                    <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+                    <p class="error-message" *ngIf="errorMessage">{{ 'SEARCH_TASK_ERROR' | translate }}
+                    </p>
                 </form>
             </div>
         </div>
@@ -54,50 +56,52 @@
                         {{task.title}}
                     </p>
                     <div class="action-icons-container">
-                        <!-- <div class="arrows-container">
+                        <div class="arrows-container">
                             <i (click)="showMoreDetails(task)"
                                 [class]="moreLessTask === task? 'fa-solid fa-angles-up' : 'fa-solid fa-angles-down'"></i>
                         </div>
                         <div class="arrows-container-large">
                             <i (click)="showMoreDetails(task)"
                                 [class]="moreLessTask === task? 'fa-solid fa-angles-left' : 'fa-solid fa-angles-right'"></i>
-                        </div> -->
+                        </div>
                     </div>
-                    <p class="priority" [class]="isPriority(task)" title="priority" (click)="showMoreDetails(task)">
-                        {{task.priority}}</p>
+                    <p class="priority" [class]="isPriority(task)" title="{{'PRIORITY' | translate}}"
+                        (click)="showMoreDetails(task)">
+                        {{task.priority | uppercase | translate}}</p>
                     <div class="action-icons-container">
-                        <!-- <div class="arrows-container">
-                            <i (click)="showMoreDetails(task)"
-                                [class]="moreLessTask === task? 'fa-solid fa-angles-up' : 'fa-solid fa-angles-down'"></i>
-                        </div>
-                        <div class="arrows-container-large">
-                            <i (click)="showMoreDetails(task)"
-                                [class]="moreLessTask === task? 'fa-solid fa-angles-left' : 'fa-solid fa-angles-right'"></i>
-                        </div> -->
-                        <i class="fa-solid fa-trash-can" title="delete task" (click)="toggleDeleteModal(task)"></i>
-                        <i class="fa-solid fa-pen" title="update task" (click)="toggleUpdateModal(task)"></i>
+                        <i class="fa-solid fa-trash-can" title="{{'DELETE_TASK' | translate}}"
+                            (click)="toggleDeleteModal(task)"></i>
+                        <i class="fa-solid fa-pen" title="{{'EDIT_TASK' | translate}}"
+                            (click)="toggleUpdateModal(task)"></i>
                     </div>
                 </div>
                 <div class="more-information" *ngIf=" moreLessTask === task">
                     <div class="more-information-body">
                         <p class="title"><strong>{{task.title}}</strong>
                         </p>
-                        <p class="description"><strong>Description: </strong> <span>{{task.description}} </span></p>
-                        <p><strong>Status: </strong> <span>{{task.status}} </span></p>
-                        <p><strong>Priority: </strong> <span>{{task.priority}} </span></p>
-                        <p><strong>Due Date: </strong> <span>{{task.due_date |
+                        <p class="description"><strong>{{'DESCRIPTION' | translate}}: </strong>
+                            <span>{{task.description}} </span>
+                        </p>
+                        <p><strong>{{'STATUS' | translate}}: </strong> <span>{{task.status.toUpperCase() | translate}}
+                            </span></p>
+                        <p><strong>{{'PRIORITY' | translate}}: </strong> <span>{{task.priority.toUpperCase() |
+                                translate}} </span>
+                        </p>
+                        <p><strong>{{'DUE_DATE' | translate}}: </strong> <span>{{task.due_date |
                                 date:
                                 'dd.MM.yyyy HH:mm'}}
                             </span></p>
-                        <p><strong>Created at: </strong> <span>{{task.created_at | date: 'dd.MM.yyyy HH:mm'}}
+                        <p><strong>{{'CREATED_AT' | translate}}: </strong> <span>
+                                {{task.created_at | date: 'dd.MM.yyyy HH:mm'}}
                             </span>
                         </p>
-                        <p *ngIf="task.updated_at"><strong>Updated at: </strong> <span>
+                        <p *ngIf="task.updated_at"><strong>{{'UPDATED_AT' | translate}}: </strong> <span>
                                 {{task.updated_at | date: 'dd.MM.yyyy HH:mm'}} </span> </p>
                     </div>
                     <div class="action-buttons-container">
-                        <button class="delete-button" (click)="toggleDeleteModal(task)">Delete</button>
-                        <button class="main-button" (click)="toggleUpdateModal(task)">Update</button>
+                        <button class="delete-button" (click)="toggleDeleteModal(task)">{{'DELETE' |
+                            translate}}</button>
+                        <button class="main-button" (click)="toggleUpdateModal(task)">{{'UPDATE' | translate}}</button>
                     </div>
                     <div class="arrows-container">
                         <i (click)="showMoreDetails(task)"
@@ -116,7 +120,8 @@
         </div>
     </div>
     <ng-template #loginMessage>
-        <p>Please <span class="redirect" (click)="redirectToLogin()">Login</span> to see your tasks</p>
+        <p>Please <span class="redirect" (click)="redirectToLogin()">{{'LOGIN' | translate}}</span> to see your tasks
+        </p>
     </ng-template>
     <app-create-task-modal *ngIf="showCreateModal" (toggleCreateModal)="toggleCreateModal()"
         (responseMessage)="handleResponseMessageChange($event)" (refreshTasks)="getUserTasks()">

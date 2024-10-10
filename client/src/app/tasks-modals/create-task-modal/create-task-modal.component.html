@@ -1,42 +1,44 @@
 <div class="modal">
     <div class="modal-header">
-        <h2>Add Task</h2>
+        <h2>{{'ADD_TASK' | translate}}</h2>
     </div>
     <div class="modal-content">
         <form #newTaskForm="ngForm" (submit)="createTask(newTaskForm)">
             <div class="input-container">
-                <label for="title">Title <span class="required-marker">*</span></label>
+                <label for="title">{{'TITLE' | translate}} <span class="required-marker">*</span></label>
                 <input #titleInput type="text" name="title" autocomplete="new-title" required ngModel>
             </div>
             <div class="input-container">
-                <label for="description">Description</label>
+                <label for="description">{{'DESCRIPTION' | translate}}</label>
                 <textarea name="description" rows="5" ngModel></textarea>
             </div>
             <div class="input-container">
-                <label for="due_date">Due date <span class="required-marker">*</span></label>
+                <label for="due_date">{{'DUE_DATE' | translate}} <span class="required-marker">*</span></label>
                 <input type="datetime-local" name="due_date" autocomplete="new-date" required ngModel />
             </div>
             <div class="input-container">
-                <label for="status">Select status</label>
+                <label for="status">{{'SELECT_STATUS' | translate}}</label>
                 <select name="status" autocomplete="new-status" [(ngModel)]="defaultStatus">
-                    <option value="Pending">Pending</option>
-                    <option value="In progress">In progress</option>
-                    <option value="Cancelled">Cancelled</option>
-                    <option value="Completed">Completed</option>
+                    <option value="Pending">{{'PENDING' | translate}}</option>
+                    <option value="In progress">{{'IN PROGRESS' | translate}}</option>
+                    <option value="Cancelled">{{'CANCELLED' | translate}}</option>
+                    <option value="Completed">{{'COMPLETED' | translate}}</option>
                 </select>
             </div>
             <div class="input-container">
-                <label for="priority">Select priority</label>
+                <label for="priority">{{'SELECT_PRIORITY' | translate}}</label>
                 <select name="priority" autocomplete="new-priority" [(ngModel)]="defaultPriority">
-                    <option value="Low">Low</option>
-                    <option value="Medium">Medium</option>
-                    <option value="High">High</option>
-                    <option value="Urgent">Urgent</option>
+                    <option value="Low">{{'LOW' | translate}}</option>
+                    <option value="Medium">{{'MEDIUM' | translate}}</option>
+                    <option value="High">{{'HIGH' | translate}}</option>
+                    <option value="Urgent">{{'URGENT' | translate}}</option>
                 </select>
             </div>
             <div class="modal-footer">
-                <button class="cancel-button" type="button" (click)="closeCreateModal()">Cancel</button>
-                <button class="main-button" type="submit">Create</button>
+                <button class="cancel-button" type="button" (click)="closeCreateModal()">{{'CANCEL'
+                    | translate}}</button>
+                <button class="main-button" type="submit">{{'CREATE'
+                    | translate}}</button>
             </div>
         </form>
         <p class="error-message" *ngIf="requiredError">{{requiredError}}</p>

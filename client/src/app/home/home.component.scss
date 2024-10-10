@@ -10,7 +10,7 @@
     @include ROW_JUSTIFY_CENTER;
     h2 {
       width: 75%;
-      text-align: left;
+      text-align: center;
       line-height: 3rem;
       text-decoration: underline;
       color: $MAIN_COLOR;
@@ -24,6 +24,9 @@
     .go-up,
     .go-down {
       font-size: 3rem;
+    }
+    .go-up {
+      padding-top: 4rem;
     }
     .go-down {
       padding-top: 1rem;

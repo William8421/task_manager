@@ -10,7 +10,7 @@ import { AboutComponent } from './about/about.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ProfileComponent } from './user/profile/profile.component';
 import { DeleteTaskModalComponent } from './tasks-modals/delete-task-modal/delete-task-modal.component';
 import { UpdateTaskModalComponent } from './tasks-modals/update-task-modal/update-task-modal.component';
@@ -18,6 +18,12 @@ import { CreateTaskModalComponent } from './tasks-modals/create-task-modal/creat
 import { EditProfileModalComponent } from './user/edit-profile-modal/edit-profile-modal.component';
 import { ChangePasswordModalComponent } from './user/change-password-modal/change-password-modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -41,6 +47,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],

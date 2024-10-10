@@ -20,6 +20,7 @@ export class TasksComponent implements OnInit {
   // filter = 'status';
   defaultStatus = 'all';
   defaultPriority = 'all';
+  searchTaskError = '';
 
   selectedTask: TaskProps | null = null;
   moreLessTask: TaskProps | null = null;
@@ -133,6 +134,8 @@ export class TasksComponent implements OnInit {
       },
       error: (err) => {
         console.error(err);
+        this.searchTaskError = err.error;
+
         this.errorMessage = err.error;
       },
     });

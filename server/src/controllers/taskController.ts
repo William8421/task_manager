@@ -123,7 +123,7 @@ export const searchTasksByTitle = async (req: Request, res: Response) => {
   try {
     // Use parameterized query to prevent SQL injection
     const tasksQuery = await pool.query(
-      `SELECT * FROM tasks WHERE user_id = $1 AND title LIKE $2`,
+      `SELECT * FROM tasks WHERE user_id = $1 AND title ILIKE $2`,
       [user_id, `%${title}%`]
     );
 
