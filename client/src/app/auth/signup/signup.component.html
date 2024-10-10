@@ -47,7 +47,7 @@
                 <i class="fa-solid fa-cloud-arrow-up" type="button" (click)="selectFile()"></i>
                 <span class="image-name" *ngIf="imageName">{{ imageName }}</span>
                 <span *ngIf="selectedFile && selectedImage === ''">
-                    <button class="main-button" type="button" (click)="uploadImage()">Upload</button>
+                    <button class="main-button" type="button" (click)="uploadImage()">{{'UPLOAD' | translate}}</button>
                 </span>
             </div>
         </div>

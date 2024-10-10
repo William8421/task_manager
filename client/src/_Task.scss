@@ -221,6 +221,7 @@
         text-align: left;
         .form-container {
           form {
+            width: fit-content;
             justify-content: flex-start;
             .error-message {
               text-align: left;

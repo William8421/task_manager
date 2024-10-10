@@ -20,6 +20,9 @@
         text-align: left;
       }
       .key-features {
+        h2 {
+          padding-bottom: 2rem;
+        }
         .features-container {
           @include COLUMN_ALIGN_CENTER;
           .tasks-img-container {
@@ -66,7 +69,7 @@
           gap: 1;
           .aws-background {
             img {
-              width: 90%;
+              width: 95%;
               border-radius: 6px;
             }
           }

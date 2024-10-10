@@ -42,7 +42,7 @@
       width: 100%;
       a {
         text-decoration: none;
-        color: black;
+        color: $MAIN_COLOR;
       }
     }
   }
@@ -67,9 +67,11 @@
         @include ROW_JUSTIFY_BETWEEN;
         gap: 0.5rem;
         select {
-          border: 1px solid #ccc;
+          border: none;
           border-radius: 6px;
           padding: 2px;
+          background-color: transparent;
+          color: $MAIN_COLOR;
         }
         .flag-icon {
           width: 30px;
@@ -113,6 +115,18 @@
 .scroll-background {
   background-color: $SECONDARY_COLOR;
 }
+.scroll-background {
+  .app-name,
+  .menu-off,
+  .language-switcher {
+    h2,
+    i,
+    button,
+    select {
+      color: $MODAL_BG_COLOR !important;
+    }
+  }
+}
 
 @media screen and (min-width: $SMALL_SCREEN) {
   .navbar-container {
@@ -152,7 +166,7 @@
         background-color: transparent;
         button {
           font-size: 0.8rem;
-          color: black;
+          color: $MAIN_COLOR;
           font-family: "Libre Baskerville", serif;
           cursor: pointer;
         }
@@ -183,25 +197,6 @@
         }
         .close-navbar {
           display: none;
-        }
-      }
-    }
-  }
-  .scroll-background {
-    .app-name {
-      a {
-        h2 {
-          color: white;
-        }
-      }
-    }
-    .menu-off {
-      .routes-container {
-        a,
-        div {
-          button {
-            color: white;
-          }
         }
       }
     }
