@@ -66,17 +66,16 @@
       .language-switcher {
         @include ROW_JUSTIFY_BETWEEN;
         gap: 0.5rem;
+        i,
+        select {
+          color: white;
+          font-size: 1.4rem;
+        }
         select {
           border: none;
           border-radius: 6px;
           padding: 2px;
           background-color: transparent;
-          color: $MAIN_COLOR;
-        }
-        .flag-icon {
-          width: 30px;
-          border: none;
-          border-radius: 6px;
         }
       }
       .auth-container {
@@ -123,7 +122,7 @@
     i,
     button,
     select {
-      color: $MODAL_BG_COLOR !important;
+      color: $BG_COLOR !important;
     }
   }
 }
@@ -172,14 +171,13 @@
         }
 
         .language-switcher {
+          i,
+          select {
+            color: $MAIN_COLOR;
+          }
           select {
             font-size: 0.7rem;
             height: 17px;
-            align-self: flex-end;
-          }
-          .flag-icon {
-            width: 25px;
-            height: 15px;
             align-self: flex-end;
           }
         }
@@ -222,10 +220,6 @@
         .language-switcher {
           select {
             font-size: 0.8rem;
-            height: 20px;
-          }
-          .flag-icon {
-            width: 30px;
             height: 20px;
           }
         }
