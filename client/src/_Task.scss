@@ -4,6 +4,7 @@
   @include COLUMN_ALIGN_CENTER;
   gap: 3rem;
   font-size: 1.2rem;
+  color: $MAIN_COLOR;
   button {
     align-self: center;
   }
@@ -134,6 +135,7 @@
           padding: 1rem;
           width: 90%;
           margin: 0 auto;
+          color: black;
           .more-information-body {
             background: url(./assets/lined-page.jpg) left / cover no-repeat;
             padding: 1rem;

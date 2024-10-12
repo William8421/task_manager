@@ -5,6 +5,7 @@
   @include COLUMN_ALIGN_CENTER;
   gap: 3rem;
   font-size: 1.2rem;
+  color: $MAIN_COLOR;
   .user-container {
     @include COLUMN_ALIGN_CENTER;
     margin: 0 auto;

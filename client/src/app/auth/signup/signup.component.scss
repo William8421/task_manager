@@ -4,6 +4,7 @@
   font-size: 1.2rem;
   padding-bottom: 3rem;
   padding-top: 5rem;
+  color: $MAIN_COLOR;
   form {
     @include COLUMN_ALIGN_CENTER;
     gap: 1rem;
