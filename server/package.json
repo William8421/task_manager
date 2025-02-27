@@ -9,6 +9,9 @@
       "vercel-build": "npm run build",
       "dev": "ts-node-dev src/server.ts"
     },
+    "engines": {
+    "node": "20.x"
+  },
     "keywords": [],
     "author": "",
     "license": "ISC",
