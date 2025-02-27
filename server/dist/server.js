@@ -35,3 +35,4 @@ app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
     console.log(`Database: ${process.env.PG_DATABASE}`);
 });
+//# sourceMappingURL=server.js.map

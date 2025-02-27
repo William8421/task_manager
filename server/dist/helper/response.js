@@ -11,3 +11,4 @@ const sendErrorResponse = (res, statusCode, message) => {
     return res.status(statusCode).send(message);
 };
 exports.sendErrorResponse = sendErrorResponse;
+//# sourceMappingURL=response.js.map

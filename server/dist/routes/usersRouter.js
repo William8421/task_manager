@@ -63,3 +63,4 @@ router.put("/profile/update", validateToken_1.validateToken, userController_1.up
  */
 router.put("/password/change", validateToken_1.validateToken, validators_1.validatePassword, validators_1.handleValidationErrors, userController_1.changePassword);
 exports.default = router;
+//# sourceMappingURL=usersRouter.js.map

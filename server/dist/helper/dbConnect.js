@@ -25,3 +25,4 @@ exports.pool.query("SELECT NOW()", (err, res) => {
         console.log("Query result", res.rows);
     }
 });
+//# sourceMappingURL=dbConnect.js.map

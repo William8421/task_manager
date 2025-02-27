@@ -26,3 +26,4 @@ const validateToken = (req, res, next) => {
     }
 };
 exports.validateToken = validateToken;
+//# sourceMappingURL=validateToken.js.map
