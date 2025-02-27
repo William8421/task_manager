@@ -10,7 +10,7 @@
       "dev": "ts-node-dev src/server.ts"
     },
     "engines": {
-    "node": "20.x"
+    "node": "22.x"
   },
     "keywords": [],
     "author": "",
