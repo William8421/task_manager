@@ -18,4 +18,3 @@ function verifyToken(token) {
         return null;
     }
 }
-//# sourceMappingURL=gernerateToken.js.map

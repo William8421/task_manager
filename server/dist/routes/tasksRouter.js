@@ -56,4 +56,3 @@ router.put("/task/update", validateToken_1.validateToken, taskController_1.updat
  */
 router.delete("/delete", validateToken_1.validateToken, taskController_1.deleteTask);
 exports.default = router;
-//# sourceMappingURL=tasksRouter.js.map
