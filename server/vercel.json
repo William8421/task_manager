@@ -1,15 +1,15 @@
-{
-    "version": 2,
-    "builds": [
-      {
-        "src": "server/src/server.ts",
-        "use": "@vercel/node"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "server/dist/server.js"
-      }
-    ]
+"version": 2,
+"builds": [
+  {
+    "src": "server/dist/server.js",
+    "use": "@vercel/node"
   }
+],
+"env": {
+  "PG_USER": "postgres.jgcqpugdetpoifalcmzp",
+  "PG_PASSWORD": "taskmanagerdatabase",
+  "PG_HOST": "aws-0-eu-central-1.pooler.supabase.com",
+  "PG_PORT": "6543",
+  "PG_DATABASE": "postgres"
+}
+}
