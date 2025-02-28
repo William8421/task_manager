@@ -16,9 +16,17 @@ if (!process.env.PORT) {
   process.exit(1);
 }
 
+const corsOptions = {
+  origin: process.env.FRONTEND_URL || "http://localhost:4200",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+};
+
 // Middleware
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions));
 
 // Define routes
 app.use("/users", usersRouter);
