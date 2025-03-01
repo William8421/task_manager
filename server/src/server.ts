@@ -17,7 +17,7 @@ if (!process.env.PORT) {
 }
 
 const corsOptions = {
-  origin: process.env.FRONTEND_URL || "http://localhost:4200",
+  origin: "http://localhost:4200",
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   preflightContinue: false,
@@ -38,11 +38,6 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   res.status(500).send("Something went wrong!");
 });
 
-app.get("/test", (req: Request, res: Response) => {
-  res.send("Server is running!");
-});
-
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
-  console.log(`Database: ${process.env.PG_DATABASE}`);
 });
