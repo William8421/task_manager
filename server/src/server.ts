@@ -16,11 +16,25 @@ if (!process.env.PORT) {
   process.exit(1);
 }
 
-const corsOptions = {
-  origin: [process.env.FRONTEND_URL || "http://localhost:4200"],
+const allowedOrigins = [
+  process.env.FRONTEND_URL || "http://localhost:4200",
+  "http://localhost:4200", // Always allow local dev
+];
+
+const corsOptions: cors.CorsOptions = {
+  origin: function (
+    origin: string | undefined,
+    callback: (err: Error | null, allow?: boolean) => void
+  ) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true); // Allow the request
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
-  preflightContinue: false,
+  credentials: true, // Required for auth headers or cookies
   optionsSuccessStatus: 204,
 };
 

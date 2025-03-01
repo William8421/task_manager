@@ -17,11 +17,22 @@ if (!process.env.PORT) {
     console.error("Please define PORT in your .env file");
     process.exit(1);
 }
+const allowedOrigins = [
+    process.env.FRONTEND_URL || "http://localhost:4200",
+    "http://localhost:4200", // Always allow local dev
+];
 const corsOptions = {
-    origin: [process.env.FRONTEND_URL || "http://localhost:4200"],
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true); // Allow the request
+        }
+        else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
-    preflightContinue: false,
+    credentials: true, // Required for auth headers or cookies
     optionsSuccessStatus: 204,
 };
 // Middleware
