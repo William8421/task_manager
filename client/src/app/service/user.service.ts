@@ -26,7 +26,8 @@ export class UserService {
 
   // baseURL = 'http://35.156.80.110:8000';
   // baseURL = 'http://localhost:8000';
-  baseURL = 'https://task-manager-server-opal.vercel.app';
+  // baseURL = 'https://task-manager-server-opal.vercel.app';
+  baseURL = 'https://task-manager-liart-one.vercel.app';
 
   constructor(private http: HttpClient) {
     this.checkLoggedInStatus();
