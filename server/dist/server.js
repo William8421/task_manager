@@ -26,7 +26,7 @@ const corsOptions = {
 };
 // Middleware
 app.use(express_1.default.json());
-app.use((0, cors_1.default)());
+app.use((0, cors_1.default)(corsOptions));
 // Define routes
 app.use("/users", usersRouter_1.default);
 app.use("/tasks", tasksRouter_1.default);
@@ -35,10 +35,6 @@ app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send("Something went wrong!");
 });
-app.get("/test", (req, res) => {
-    res.send("Server is running!");
-});
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
-    console.log(`Database: ${process.env.PG_DATABASE}`);
 });
