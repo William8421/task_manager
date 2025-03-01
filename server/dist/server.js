@@ -20,11 +20,12 @@ if (!process.env.PORT) {
 const allowedOrigins = [
     process.env.FRONTEND_URL || "http://localhost:4200",
     "http://localhost:4200", // Always allow local dev
+    "https://wm-task-manager.netlify.app", // Your deployed frontend
 ];
 const corsOptions = {
     origin: function (origin, callback) {
         if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true); // Allow the request
+            callback(null, true); // Allow request
         }
         else {
             callback(new Error("Not allowed by CORS"));
@@ -32,7 +33,7 @@ const corsOptions = {
     },
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true, // Required for auth headers or cookies
+    credentials: true, // Required for authentication headers
     optionsSuccessStatus: 204,
 };
 // Middleware

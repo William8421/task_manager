@@ -19,7 +19,7 @@ if (!process.env.PORT) {
 const allowedOrigins = [
   process.env.FRONTEND_URL || "http://localhost:4200",
   "http://localhost:4200", // Always allow local dev
-  "https://deft-fudge-93af23.netlify.app", // Your deployed frontend
+  "https://wm-task-manager.netlify.app", // Your deployed frontend
 ];
 
 const corsOptions: cors.CorsOptions = {
