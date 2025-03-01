@@ -19,6 +19,7 @@ if (!process.env.PORT) {
 const allowedOrigins = [
   process.env.FRONTEND_URL || "http://localhost:4200",
   "http://localhost:4200", // Always allow local dev
+  "https://deft-fudge-93af23.netlify.app", // Your deployed frontend
 ];
 
 const corsOptions: cors.CorsOptions = {
@@ -27,14 +28,14 @@ const corsOptions: cors.CorsOptions = {
     callback: (err: Error | null, allow?: boolean) => void
   ) {
     if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true); // Allow the request
+      callback(null, true); // Allow request
     } else {
       callback(new Error("Not allowed by CORS"));
     }
   },
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true, // Required for auth headers or cookies
+  credentials: true, // Required for authentication headers
   optionsSuccessStatus: 204,
 };
 
