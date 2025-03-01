@@ -18,7 +18,7 @@ if (!process.env.PORT) {
     process.exit(1);
 }
 const corsOptions = {
-    origin: process.env.FRONTEND_URL || "http://localhost:4200",
+    origin: [process.env.FRONTEND_URL || "http://localhost:4200"],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     preflightContinue: false,
