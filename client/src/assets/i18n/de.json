@@ -27,7 +27,7 @@
   "ANGULAR_TITLE": "Angular",
   "ANGULAR_DESCRIPTION": "Das Frontend von Task-Manager wurde mit Angular entwickelt, einem beliebten, auf TypeScript basierenden Webanwendungs-Framework, das von Google gewartet wird. Die modulare Architektur und das umfangreiche Tooling von Angular ermöglichen eine schnelle Entwicklung dynamischer und reaktionsschneller Benutzeroberflächen.",
   "DOCKER_TITLE": "Docker",
-  "DOCKER_DESCRIPTION": "Task-Manager verwendet Docker für die Produktion und ermöglicht so eine nahtlose Containerisierung und Bereitstellung von Backend- und Frontend-Komponenten.",
+  "DOCKER_DESCRIPTION": "Task-Manager wird mit Docker containerisiert, um eine einfache Bereitstellung und Skalierbarkeit zu ermöglichen.",
   "AWS_TITLE": "Amazon Web Services (AWS)",
   "AMAZON_RDS_TITLE": "Amazon RDS",
   "AMAZON_RDS_DESCRIPTION": "Task-Manager nutzt Amazon RDS (Relational Database Service) für PostgreSQL, um seine Datenbank sicher in der Cloud zu hosten. Mit Funktionen wie automatisierten Backups und Skalierbarkeit vereinfacht Amazon RDS das Datenbankmanagement und erhöht die Zuverlässigkeit der Anwendung.",
