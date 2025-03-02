@@ -47,7 +47,7 @@
             </div>
             <div class="language-switcher">
                 <i class="fa-solid fa-globe"></i>
-                <select (change)="onLanguageChange($event)" [value]="currentLang">
+                <select id="language-switcher" (change)="onLanguageChange($event)" [value]="currentLang">
                     <option value="en">EN</option>
                     <option value="de">DE</option>
                 </select>

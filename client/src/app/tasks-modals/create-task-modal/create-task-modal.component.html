@@ -6,19 +6,19 @@
         <form #newTaskForm="ngForm" (submit)="createTask(newTaskForm)">
             <div class="input-container">
                 <label for="title">{{'TITLE' | translate}} <span class="required-marker">*</span></label>
-                <input #titleInput type="text" name="title" autocomplete="new-title" required ngModel>
+                <input #titleInput type="text" id="title" name="title" autocomplete="new-title" required ngModel>
             </div>
             <div class="input-container">
                 <label for="description">{{'DESCRIPTION' | translate}}</label>
-                <textarea name="description" rows="5" ngModel></textarea>
+                <textarea id="description" name="description" rows="5" ngModel></textarea>
             </div>
             <div class="input-container">
                 <label for="due_date">{{'DUE_DATE' | translate}} <span class="required-marker">*</span></label>
-                <input type="datetime-local" name="due_date" autocomplete="new-date" required ngModel />
+                <input type="datetime-local" id="due_date" name="due_date" autocomplete="new-date" required ngModel />
             </div>
             <div class="input-container">
                 <label for="status">{{'SELECT_STATUS' | translate}}</label>
-                <select name="status" autocomplete="new-status" [(ngModel)]="defaultStatus">
+                <select id="status" name="status" autocomplete="new-status" [(ngModel)]="defaultStatus">
                     <option value="Pending">{{'PENDING' | translate}}</option>
                     <option value="In progress">{{'IN PROGRESS' | translate}}</option>
                     <option value="Cancelled">{{'CANCELLED' | translate}}</option>
@@ -27,7 +27,7 @@
             </div>
             <div class="input-container">
                 <label for="priority">{{'SELECT_PRIORITY' | translate}}</label>
-                <select name="priority" autocomplete="new-priority" [(ngModel)]="defaultPriority">
+                <select id="priority" name="priority" autocomplete="new-priority" [(ngModel)]="defaultPriority">
                     <option value="Low">{{'LOW' | translate}}</option>
                     <option value="Medium">{{'MEDIUM' | translate}}</option>
                     <option value="High">{{'HIGH' | translate}}</option>

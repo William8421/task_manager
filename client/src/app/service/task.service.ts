@@ -13,9 +13,7 @@ export class TaskService {
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
   isLoggedIn$: Observable<boolean> = this.isLoggedInSubject.asObservable();
 
-  // baseURL = 'http://35.156.80.110:8000';
-  // baseURL = 'http://localhost:8000';
-  // baseURL = 'https://task-manager-server-opal.vercel.app';
+  // baseURL = 'http://localhost:3000';
   baseURL = 'https://task-manager-liart-one.vercel.app';
 
   constructor(private http: HttpClient) {

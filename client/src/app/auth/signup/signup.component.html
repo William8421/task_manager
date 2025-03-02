@@ -4,37 +4,38 @@
         <!-- Username -->
         <div class="input-container">
             <label for="username">{{ 'USERNAME' | translate }} <span>*</span></label>
-            <input #usernameInput type="text" name="username" autocomplete="username" required ngModel />
+            <input #usernameInput type="text" id="username" name="username" autocomplete="username" required ngModel />
         </div>
 
         <!-- First Name -->
         <div class="input-container">
             <label for="first_name">{{ 'FIRST_NAME' | translate }} <span>*</span></label>
-            <input type="text" name="first_name" autocomplete="first_name" required ngModel />
+            <input type="text" id="first_name" name="first_name" autocomplete="first_name" required ngModel />
         </div>
 
         <!-- Last Name -->
         <div class="input-container">
             <label for="last_name">{{ 'LAST_NAME' | translate }} <span>*</span></label>
-            <input type="text" name="last_name" autocomplete="last_name" required ngModel />
+            <input type="text" id="last_name" name="last_name" autocomplete="last_name" required ngModel />
         </div>
 
         <!-- Email -->
         <div class="input-container">
             <label for="email">Email <span>*</span></label>
-            <input type="email" name="email" autocomplete="email" required ngModel />
+            <input type="email" id="email" name="email" autocomplete="email" required ngModel />
         </div>
 
         <!-- Password -->
         <div class="input-container">
             <label for="password">{{ 'PASSWORD' | translate }} <span>*</span></label>
-            <input [type]="hide ? 'text' : 'password'" name="password" autocomplete="new-password" required ngModel />
+            <input [type]="hide ? 'text' : 'password'" id="password" name="password" autocomplete="new-password"
+                required ngModel />
             <i class="eye-icon" (click)="hide = !hide" [class]="hide ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash'"></i>
         </div>
         <div class="input-container">
             <label for="confirmPassword">{{ 'CONFIRM_PASSWORD' | translate }} <span>*</span></label>
-            <input [type]="hideConfirm ? 'text' : 'password'" name="confirmPassword" autocomplete="new-password"
-                required ngModel />
+            <input [type]="hideConfirm ? 'text' : 'password'" id="confirmPassword" name="confirmPassword"
+                autocomplete="new-password" required ngModel />
             <i class="eye-icon" (click)="hideConfirm = !hideConfirm"
                 [class]="hideConfirm ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash'"></i>
         </div>

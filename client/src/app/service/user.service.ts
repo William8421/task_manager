@@ -24,9 +24,7 @@ export class UserService {
   private profileIconSubject = new BehaviorSubject<string | null>('');
   userIcon$: Observable<string | null> = this.profileIconSubject.asObservable();
 
-  // baseURL = 'http://35.156.80.110:8000';
-  // baseURL = 'http://localhost:8000';
-  // baseURL = 'https://task-manager-server-opal.vercel.app';
+  // baseURL = 'http://localhost:3000';
   baseURL = 'https://task-manager-liart-one.vercel.app';
 
   constructor(private http: HttpClient) {
