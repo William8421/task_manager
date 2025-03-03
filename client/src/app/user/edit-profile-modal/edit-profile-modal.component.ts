@@ -32,6 +32,7 @@ export class EditProfileModalComponent implements OnInit {
   selectedImage = '';
   errorMessage = '';
   imageName = '';
+  removeProfilePicture = false;
 
   // Cloudinary upload parameters
   uploadPreset = environment.cloudinaryUploadPreset;
@@ -50,6 +51,10 @@ export class EditProfileModalComponent implements OnInit {
     if (fileInput) {
       fileInput.click();
     }
+  }
+
+  removePicture() {
+    this.removeProfilePicture = true;
   }
 
   // Handle file selection for profile picture upload
@@ -89,7 +94,11 @@ export class EditProfileModalComponent implements OnInit {
   // Edit user profile
   editProfile(editProfileData: NgForm) {
     if (editProfileData.valid) {
-      editProfileData.value.profile_picture = this.selectedImage;
+      if (this.removeProfilePicture) {
+        editProfileData.value.profile_picture = '';
+      } else if (this.selectedImage) {
+        editProfileData.value.profile_picture = this.selectedImage;
+      }
 
       this.userService.editProfile(editProfileData.value).subscribe({
         next: (item: UserResponseProps) => {

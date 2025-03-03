@@ -88,6 +88,9 @@ export class SignupComponent implements OnInit {
   }
 
   register(signUpForm: NgForm) {
+    console.log('select file', this.selectFile);
+    console.log('select image', this.selectedImage);
+
     if (signUpForm.valid) {
       const password = signUpForm.value.password;
       const confirmPassword = signUpForm.value.confirmPassword;

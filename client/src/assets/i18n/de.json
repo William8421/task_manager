@@ -95,6 +95,7 @@
   "NEW_FIRST_NAME": "Neuer Vorname",
   "NEW_LAST_NAME": "Neuer Nachname",
   "EDIT_PROFILE_PICTURE": "Profilbild Aktualisieren",
+  "REMOVE_PROFILE_PICTURE": "Profilbild entfernen",
   "UPLOAD": "Hochladen",
 
   "EMAIL_OR_PASSWORD_ERROR": "Ungültige E-Mail oder Passwort",

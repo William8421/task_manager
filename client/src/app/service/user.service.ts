@@ -140,6 +140,9 @@ export class UserService {
       )
       .pipe(
         tap((response: UserResponseProps) => {
+          if ((response.profile_picture = '')) {
+            this.profileIconSubject.next(response.user.profile_picture);
+          }
           this.profileIconSubject.next(response.profile_picture);
         })
       );

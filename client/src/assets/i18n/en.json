@@ -95,6 +95,7 @@
   "NEW_FIRST_NAME": "New First Name",
   "NEW_LAST_NAME": "New Last Name",
   "EDIT_PROFILE_PICTURE": "Edit profile picture",
+  "REMOVE_PROFILE_PICTURE": "Remove profile picture",
   "UPLOAD": "Upload",
 
   "EMAIL_OR_PASSWORD_ERROR": "Either email or password is incorrect!",

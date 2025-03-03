@@ -160,6 +160,7 @@ export const updateUser = async (req: Request, res: Response) => {
         );
       }
     }
+    const newProfilePicture = profile_picture === "" ? null : profile_picture;
 
     const updateQuery = `
       UPDATE users
@@ -176,7 +177,7 @@ export const updateUser = async (req: Request, res: Response) => {
       username || user.username,
       first_name || user.first_name,
       last_name || user.last_name,
-      profile_picture || user.profile_picture,
+      profile_picture,
     ]);
     const updatedUser = result.rows[0];
 

@@ -38,6 +38,7 @@
       .input-container {
         margin: 0.5rem;
         @include COLUMN_ALIGN_CENTER;
+        gap: 0.5rem;
         width: 90%;
         position: relative;
         label {
@@ -75,6 +76,7 @@
             white-space: nowrap;
             text-overflow: ellipsis;
             overflow: hidden;
+            border: solid 1px red;
           }
         }
         .eye-icon {
@@ -82,6 +84,9 @@
           top: 63%;
           right: 7%;
           font-size: 0.7rem;
+        }
+        i {
+          cursor: pointer;
         }
       }
       .modal-footer {
