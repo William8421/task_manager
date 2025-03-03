@@ -56,7 +56,7 @@ export class ProfileComponent implements OnInit {
 
   // Open the change password modal
   openChangePasswordModal(user: UserProps) {
-    this.user = user; // Set the user data
+    this.user = user;
     this.showChangePasswordModal = true;
   }
 

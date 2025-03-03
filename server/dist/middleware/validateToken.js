@@ -14,11 +14,9 @@ const validateToken = (req, res, next) => {
         return res.status(401).send("Access denied. No token provided.");
     }
     try {
-        // Verify token
         const decoded = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET || "default_secret");
-        // If decoded is a string, parse it to a JavaScript object
         req.user = typeof decoded === "string" ? JSON.parse(decoded) : decoded;
-        next(); // Proceed to next middleware
+        next();
     }
     catch (error) {
         console.error("Token validation error:", error);

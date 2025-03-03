@@ -32,6 +32,9 @@
             p {
               display: flex;
               flex-direction: column;
+              i {
+                color: white;
+              }
             }
           }
         }
@@ -46,7 +49,6 @@
             p {
               color: black;
               -webkit-text-stroke: 0.5px $MAIN_COLOR;
-              text-stroke: 0.5px $MAIN_COLOR;
             }
           }
           .node {
@@ -60,18 +62,6 @@
           }
           .docker {
             background: url(./assets/docker.jpg) center / cover;
-          }
-        }
-      }
-      .AWS {
-        .services-container {
-          @include COLUMN_ALIGN_CENTER;
-          gap: 1;
-          .aws-background {
-            img {
-              width: 95%;
-              border-radius: 6px;
-            }
           }
         }
       }
@@ -97,7 +87,6 @@
           .features-container {
             flex-direction: row;
             gap: 1rem;
-            height: 350px;
             .tasks-img-container {
               display: block;
               img {
@@ -114,7 +103,7 @@
               display: flex;
               flex-direction: column;
               justify-content: space-between;
-              height: 100%;
+              gap: 1rem;
               p {
                 padding: 0;
               }
@@ -128,9 +117,6 @@
               width: 70%;
             }
           }
-        }
-        .AWS {
-          width: 80%;
         }
       }
     }
@@ -146,37 +132,6 @@
             justify-content: space-around;
             .tasks-img-container {
               width: 30%;
-            }
-            .features {
-              width: 60%;
-            }
-          }
-        }
-        .AWS {
-          width: 100%;
-          margin: 0;
-          padding: 4rem 3rem;
-          background: radial-gradient(
-              circle,
-              rgba(255, 255, 255, 0.9) 0%,
-              rgba(207, 219, 232, 0.5) 100%
-            ),
-            url(./assets/AWS.jpg) center / cover no-repeat;
-          border-radius: 16px;
-          color: black;
-          margin: 1rem;
-          .services-container {
-            flex-direction: row;
-            justify-content: space-around;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            p {
-              width: 50%;
-              padding: 0.5rem;
-              text-decoration: none;
-            }
-            .aws-background {
-              display: none;
             }
           }
         }
@@ -203,9 +158,6 @@
             }
           }
         }
-        .AWS {
-          padding: 7rem 6rem;
-        }
       }
     }
   }
@@ -228,9 +180,6 @@
             .tasks-img-container {
               width: 20%;
             }
-            .features {
-              width: 50%;
-            }
           }
         }
         .technologies {
@@ -238,21 +187,6 @@
           .techs-container {
             .tech {
               min-height: 200px;
-            }
-          }
-        }
-        .AWS {
-          width: 80%;
-          padding: 0;
-          background: none;
-          color: white;
-          .services-container {
-            flex-direction: column;
-            flex-wrap: wrap;
-            max-height: 500px;
-            .aws-background {
-              display: block;
-              width: 50%;
             }
           }
         }

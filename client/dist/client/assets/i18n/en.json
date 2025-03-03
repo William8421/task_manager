@@ -19,6 +19,8 @@
   "PROFILE_MANAGEMENT_DESCRIPTION": "Users have the flexibility to update their profiles, enabling them to customize their information and preferences according to their needs.",
   "TASK_MANAGEMENT_TITLE": "Task Management",
   "TASK_MANAGEMENT_DESCRIPTION": "Task-Manager simplifies task management by offering a comprehensive suite of tools to create, update, and delete tasks with ease. Whether it's organizing daily chores or tracking project milestones, Task-Manager has you covered.",
+  "LANGUAGE_SWITCH_TITLE": "Language Switch",
+  "LANGUAGE_SWITCH_DESCRIPTION": "Task-Manager supports multiple languages, allowing users to seamlessly switch between English and German. This feature enhances accessibility and ensures that users can interact with the app in their preferred language, improving their overall experience.",
   "TECHNOLOGIES_USED_TITLE": "Technologies Used",
   "NODE_EXPRESS_TITLE": "Node.js/Express",
   "NODE_EXPRESS_DESCRIPTION": "Task-Manager's backend is powered by Node.js, a versatile JavaScript runtime, and Express, a minimalist web framework for Node.js. This powerful combination provides a robust foundation for building scalable and efficient server-side applications.",

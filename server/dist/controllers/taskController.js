@@ -16,13 +16,11 @@ const response_1 = require("../helper/response");
 const createTask = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { user_id, title, description, due_date, status, priority } = req.body;
     try {
-        // Check if the user exists
         const userQuery = yield dbConnect_1.pool.query("SELECT * FROM users WHERE user_id = $1", [user_id]);
         const user = userQuery.rows[0];
         if (!user) {
             return (0, response_1.sendErrorResponse)(res, 404, "User not found");
         }
-        // Insert the new task
         const newTaskQuery = `
       INSERT INTO tasks (title, description, due_date, user_id, status, priority)
       VALUES ($1, $2, $3, $4, $5, $6)
@@ -104,12 +102,10 @@ exports.filterByStatusAndPriority = filterByStatusAndPriority;
 // search tasks by title
 const searchTasksByTitle = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { user_id, title } = req.body;
-    // Check if title is provided
     if (!title) {
         return (0, response_1.sendErrorResponse)(res, 400, "Title is required");
     }
     try {
-        // Use parameterized query to prevent SQL injection
         const tasksQuery = yield dbConnect_1.pool.query(`SELECT * FROM tasks WHERE user_id = $1 AND title ILIKE $2`, [user_id, `%${title}%`]);
         if (tasksQuery.rows.length === 0) {
             return (0, response_1.sendErrorResponse)(res, 404, "No tasks found");

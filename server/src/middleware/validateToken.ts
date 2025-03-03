@@ -3,7 +3,7 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 
 // interface that extends the existing Request interface
 interface AuthenticatedRequest extends Request {
-  user?: { [key: string]: any } | JwtPayload | undefined; // Define the user property with union type
+  user?: { [key: string]: any } | JwtPayload | undefined;
 }
 
 // Middleware function to validate JWT token
@@ -20,16 +20,14 @@ export const validateToken = (
   }
 
   try {
-    // Verify token
     const decoded: JwtPayload | string = jwt.verify(
       token,
       process.env.JWT_SECRET || "default_secret"
     );
 
-    // If decoded is a string, parse it to a JavaScript object
     req.user = typeof decoded === "string" ? JSON.parse(decoded) : decoded;
 
-    next(); // Proceed to next middleware
+    next();
   } catch (error) {
     console.error("Token validation error:", error);
     return res.status(401).send("Invalid token.");

@@ -24,7 +24,7 @@ router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const client = yield dbConnect_1.pool.connect();
         const result = yield client.query("SELECT * FROM users");
         const users = result.rows;
-        client.release(); // Release the client back to the pool
+        client.release();
         res.json(users);
     }
     catch (err) {

@@ -22,7 +22,7 @@ router.get("/", async (req: Request, res: Response) => {
     const client = await pool.connect();
     const result = await client.query("SELECT * FROM users");
     const users = result.rows;
-    client.release(); // Release the client back to the pool
+    client.release();
     res.json(users);
   } catch (err) {
     console.error("Error executing query:", err);

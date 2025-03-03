@@ -7,15 +7,12 @@ import { sendErrorResponse, sendSuccessResponse } from "../helper/response";
 
 // User registration
 export const registerUser = async (req: Request, res: Response) => {
-  // Extract user data from request body
   const { username, email, password, first_name, last_name, profile_picture } =
     req.body;
 
   try {
-    // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Check if username or email already exists
     const client = await pool.connect();
     const usernameQuery = await client.query(
       "SELECT * FROM users WHERE username = $1",
@@ -34,7 +31,6 @@ export const registerUser = async (req: Request, res: Response) => {
       return sendErrorResponse(res, 400, "Email already exists");
     }
 
-    // Insert new user into database
     const insertQuery = `
       INSERT INTO users (username, email, password, first_name, last_name, profile_picture)
       VALUES ($1, $2, $3, $4, $5, $6)
@@ -50,7 +46,6 @@ export const registerUser = async (req: Request, res: Response) => {
     ]);
     const user = newUser.rows[0];
 
-    // Generate token
     const token = generateToken({
       user_id: user.user_id,
       username: user.username,
@@ -70,7 +65,6 @@ export const signInUser = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   try {
-    // Check if the user exists based on email
     const client = await pool.connect();
     const query = "SELECT * FROM users WHERE email = $1";
     const result = await client.query(query, [email]);
@@ -84,7 +78,6 @@ export const signInUser = async (req: Request, res: Response) => {
       );
     }
 
-    // Verify the password
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
@@ -95,13 +88,11 @@ export const signInUser = async (req: Request, res: Response) => {
       );
     }
 
-    // Password is correct, generate token
     const token = generateToken({
       user_id: user.user_id,
       username: user.username,
     });
 
-    // Return token and user data
     return sendSuccessResponse(res, 200, { token, user });
   } catch (err) {
     console.error("Error executing query:", err);
@@ -154,7 +145,6 @@ export const updateUser = async (req: Request, res: Response) => {
       return sendErrorResponse(res, 404, "User not found");
     }
 
-    // Check if the username is being changed and if it exists for another user
     if (username && username !== user.username) {
       const usernameQuery = await client.query(
         "SELECT * FROM users WHERE username = $1 AND user_id != $2",
@@ -171,7 +161,6 @@ export const updateUser = async (req: Request, res: Response) => {
       }
     }
 
-    // Update user information
     const updateQuery = `
       UPDATE users
       SET username = COALESCE($2, username),
@@ -206,10 +195,8 @@ export const changePassword = async (req: Request, res: Response) => {
   const { user_id, oldPassword, password } = req.body;
 
   try {
-    // Validate the new password
     await Promise.all(validatePassword.map((validator) => validator.run(req)));
 
-    // Retrieve the user's current password from the database
     const client = await pool.connect();
     const userQuery = await client.query(
       "SELECT password FROM users WHERE user_id = $1",
@@ -226,16 +213,13 @@ export const changePassword = async (req: Request, res: Response) => {
       return sendErrorResponse(res, 401, "You can't use the same password");
     }
 
-    // Verify the current password
     const passwordMatch = await bcrypt.compare(oldPassword, user.password);
     if (!passwordMatch) {
       return sendErrorResponse(res, 401, "Incorrect password");
     }
 
-    // Hash the new password
     const hashedNewPassword = await bcrypt.hash(password, 10);
 
-    // Update the user's password in the database
     await pool.query("UPDATE users SET password = $1 WHERE user_id = $2", [
       hashedNewPassword,
       user_id,

@@ -17,7 +17,6 @@ export class TasksComponent implements OnInit {
   filterSearchMode = '';
   statusFilter = false;
   priorityFilter = false;
-  // filter = 'status';
   defaultStatus = 'all';
   defaultPriority = 'all';
   searchTaskError = '';

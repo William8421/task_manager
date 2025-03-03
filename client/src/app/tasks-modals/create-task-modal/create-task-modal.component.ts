@@ -53,7 +53,7 @@ export class CreateTaskModalComponent implements OnInit {
         },
       });
     } else {
-      this.requiredError = 'Please fill in all required fields marked with *'; // Set error message for required fields
+      this.requiredError = 'Please fill in all required fields marked with *';
     }
   }
 }
