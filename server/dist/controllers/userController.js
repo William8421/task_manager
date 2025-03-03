@@ -125,6 +125,7 @@ const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
                 return (0, response_1.sendErrorResponse)(res, 401, "Username already exists. Please try another username.");
             }
         }
+        const newProfilePicture = profile_picture === "" ? null : profile_picture;
         const updateQuery = `
       UPDATE users
       SET username = COALESCE($2, username),
@@ -139,7 +140,7 @@ const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             username || user.username,
             first_name || user.first_name,
             last_name || user.last_name,
-            profile_picture || user.profile_picture,
+            profile_picture,
         ]);
         const updatedUser = result.rows[0];
         return (0, response_1.sendSuccessResponse)(res, 200, {
