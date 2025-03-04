@@ -4,6 +4,7 @@ import { TaskProps } from 'src/types/taskTypes';
 import { TaskService } from '../service/task.service';
 import { NgForm } from '@angular/forms';
 
+type SortCriteria = 'due_date' | 'updated_at' | 'created_at' | 'priority';
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
@@ -57,6 +58,27 @@ export class TasksComponent implements OnInit {
       error: (err) => {
         console.error(err);
       },
+    });
+  }
+
+  sortTasks(event: Event) {
+    const selectElement = event.target as HTMLSelectElement; // Type assertion here
+
+    const criteria = selectElement.value as SortCriteria; // Cast to SortCriteria
+
+    this.tasks.sort((a, b) => {
+      if (criteria === 'priority') {
+        const priorityOrder = { Urgent: 1, High: 2, Medium: 3, Low: 4 };
+        return (
+          priorityOrder[a.priority as keyof typeof priorityOrder] -
+          priorityOrder[b.priority as keyof typeof priorityOrder]
+        );
+      }
+
+      return (
+        new Date(a[criteria as keyof TaskProps]).getTime() -
+        new Date(b[criteria as keyof TaskProps]).getTime()
+      );
     });
   }
 
@@ -158,6 +180,16 @@ export class TasksComponent implements OnInit {
     } else {
       this.filterSearchMode = '';
     }
+  }
+
+  // Toggle sort mode
+  toggleSortMode() {
+    if (this.filterSearchMode !== 'sort') {
+      this.filterSearchMode = 'sort';
+    } else {
+      this.filterSearchMode = '';
+    }
+    // this.sortMode = !this.sortMode;
   }
 
   // Toggle create task modal

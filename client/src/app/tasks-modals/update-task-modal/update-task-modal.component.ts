@@ -24,8 +24,13 @@ export class UpdateTaskModalComponent implements OnInit {
   @Output() responseMessage = new EventEmitter<string>();
   @ViewChild('titleInput') titleInput!: ElementRef;
 
+  editedTask: TaskProps | null = null;
+
   constructor(private taskService: TaskService) {}
   ngOnInit(): void {
+    if (this.task) {
+      this.editedTask = { ...this.task };
+    }
     setTimeout(() => {
       this.titleInput.nativeElement.focus();
     });
@@ -37,13 +42,17 @@ export class UpdateTaskModalComponent implements OnInit {
   }
 
   // Update a task
-  updateTask(updateTaskForm: NgForm, taskId: string) {
-    this.taskService.updateTask(updateTaskForm.value, taskId).subscribe({
-      next: (item: TaskResponseProps) => {
-        this.responseMessage.emit(item.message);
-        this.closeUpdateModal();
-        this.refreshTasks.emit();
-      },
-    });
+  updateTask(updateTaskForm: NgForm) {
+    if (!this.editedTask) return;
+
+    this.taskService
+      .updateTask(this.editedTask, this.editedTask.task_id)
+      .subscribe({
+        next: (item: TaskResponseProps) => {
+          this.responseMessage.emit(item.message);
+          this.closeUpdateModal();
+          this.refreshTasks.emit();
+        },
+      });
   }
 }

@@ -20,23 +20,22 @@
                     [(ngModel)]="user.last_name">
             </div>
             <div class="input-container">
-                <label for="profile_picture">{{'EDIT_PROFILE_PICTURE' |translate}}</label>
+                <label for="profile_picture">{{(user.profile_picture? 'EDIT_PROFILE_PICTURE' : 'ADD_PROFILE_PICTURE')
+                    |translate}}</label>
                 <div class="picture-button-container">
                     <input type="file" id="profile_picture" (change)="onFileSelected($event)" accept="image/*">
-                    <i class="fa-solid fa-cloud-arrow-up" type="button" (click)="selectFile()"></i>
+                    <div style="display: flex; gap: 1rem;">
+                        <i class="fa-solid fa-plus" type="button" (click)="selectFile()"></i>
+                        <div *ngIf="user.profile_picture && !removeProfilePicture">
+                            <i class="fa-solid fa-minus" (click)="removePicture()"></i>
+                        </div>
+                    </div>
                     <span class="image-name" *ngIf="imageName"> {{imageName}} </span>
                 </div>
                 <span *ngIf="selectedFile && selectedImage === '' ">
                     <button class="main-button" type="button" (click)="uploadImage()">{{'UPLOAD' |
                         translate}}</button>
                 </span>
-                <div class="input-container">
-                    <div>
-
-                        {{'REMOVE_PROFILE_PICTURE' |translate}}
-                    </div>
-                    <i class="fa-solid fa-eye-slash" (click)="removePicture()"></i>
-                </div>
             </div>
             <div class="modal-footer">
                 <button class="cancel-button" type="button" (click)="closeEditModal()">{{'CANCEL' |translate}}</button>

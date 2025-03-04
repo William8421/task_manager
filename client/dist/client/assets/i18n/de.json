@@ -58,6 +58,8 @@
   "UPDATED_AT": "Aktualisiert am",
   "FILTER_TASKS": "Aufgaben filtern",
   "SEARCH_TASKS": "Aufgaben suchen",
+  "SORT_TASKS": "Aufgaben sortieren",
+  "SORT_BY": "Sortieren nach",
   "STATUS": "Status",
   "ALL": "Alle",
   "COMPLETED": "Abgeschlossen",
@@ -95,6 +97,7 @@
   "NEW_FIRST_NAME": "Neuer Vorname",
   "NEW_LAST_NAME": "Neuer Nachname",
   "EDIT_PROFILE_PICTURE": "Profilbild Aktualisieren",
+  "ADD_PROFILE_PICTURE": "Profilbild hinzufügen",
   "REMOVE_PROFILE_PICTURE": "Profilbild entfernen",
   "UPLOAD": "Hochladen",
 

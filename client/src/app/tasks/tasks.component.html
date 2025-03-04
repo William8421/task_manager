@@ -10,6 +10,19 @@
                 (click)="toggleFilterMode()">{{'FILTER_TASKS' | translate}}</button>
             <button class="filter-search-button" title="search tasks by title"
                 (click)="toggleSearchMode()">{{'SEARCH_TASKS' | translate}}</button>
+            <button class="filter-search-button" (click)="toggleSortMode()">{{'SORT_TASKS' | translate}}</button>
+            <div class="form-container" *ngIf="filterSearchMode === 'sort'">
+                <form>
+                    <label>{{ 'SORT_BY' | translate }}
+                        <select (change)="sortTasks($event)">
+                            <option value="due_date">{{ 'DUE_DATE' | translate }}</option>
+                            <option value="updated_at">{{ 'UPDATED_AT' | translate }}</option>
+                            <option value="created_at">{{ 'CREATED_AT' | translate }}</option>
+                            <option value="priority">{{ 'PRIORITY' | translate }}</option>
+                        </select>
+                    </label>
+                </form>
+            </div>
             <div class="form-container" *ngIf="filterSearchMode === 'filter'">
                 <form #filterForm="ngForm">
                     <div>
